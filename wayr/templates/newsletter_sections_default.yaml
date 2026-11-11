@@ -1,0 +1,31 @@
+# Default section schema — deliberately generic. This is what a deployment
+# gets before onboarding; a customer-shaped schema is dropped in via
+# NEWSLETTER_SECTIONS_FILE (for the demo, hand-built from their own issues).
+#
+# Fields per section:
+#   name        heading as rendered
+#   type        stories | placeholder   (placeholder = heading + empty block for the editor)
+#   style       feature | brief | quick_hit | link_only   (stories only; sets where the link sits)
+#   tier        feature | roundup                          (stories only; which selection tier feeds it)
+#   max         cap for this section; overflow flows to the next matching section
+#   categories  optional list; absent or ["*"] means any category
+#   days        optional list of mon..sun; absent means every day
+#   show_source optional; default is true only for feature style
+sections:
+  - name: Top Story
+    type: stories
+    style: feature
+    tier: feature
+    max: 1
+
+  - name: What happened today
+    type: stories
+    style: brief
+    tier: feature
+    max: 8
+
+  - name: Also worth knowing
+    type: stories
+    style: link_only
+    tier: roundup
+    max: 10

@@ -1,0 +1,295 @@
+[
+  {
+    "timestamp": "2026-09-22T14:19:11.066191+00:00",
+    "model": "openai:gpt-5.6-luna",
+    "total_tests": 35,
+    "passed_tests": 25,
+    "pass_rate": 0.7142857142857143,
+    "content_type_exact_rate": 0.5142857142857142,
+    "news_vs_nonnews_rate": 0.7142857142857143,
+    "failed_case_ids": [
+      "real_1ac48a62",
+      "real_64b41848",
+      "real_83067aa2",
+      "real_c25bdc4f",
+      "real_c7fd72f8",
+      "real_cd30cad5",
+      "real_d1c32319",
+      "real_e15a5a19",
+      "newsroom_gpt6_astra",
+      "newsroom_openai_gsa_agreement"
+    ],
+    "common_issues": [
+      "NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False (CRITICAL) (x6)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x4)",
+      "Expected content_type='other', got 'opinion' (x3)",
+      "Expected content_type='news', got 'opinion' (x2)",
+      "Expected content_type='other', got 'news' (x2)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-22T14:21:31.341865+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 35,
+    "passed_tests": 23,
+    "pass_rate": 0.6571428571428571,
+    "content_type_exact_rate": 0.5428571428571428,
+    "news_vs_nonnews_rate": 0.6571428571428571,
+    "failed_case_ids": [
+      "real_1ac48a62",
+      "real_6474979c",
+      "real_83067aa2",
+      "real_ad988cf1",
+      "real_b1e42d18",
+      "real_c25bdc4f",
+      "real_c7fd72f8",
+      "real_cd30cad5",
+      "real_d1c32319",
+      "real_5cbc035",
+      "newsroom_gpt6_astra",
+      "newsroom_openai_gsa_agreement"
+    ],
+    "common_issues": [
+      "NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x8)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False (CRITICAL) (x4)",
+      "Expected content_type='report', got 'news' (x3)",
+      "Expected content_type='other', got 'news' (x3)",
+      "Expected content_type='other', got 'opinion' (x2)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-23T15:38:29.002025+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 35,
+    "passed_tests": 26,
+    "pass_rate": 0.7428571428571429,
+    "content_type_exact_rate": 0.6,
+    "news_vs_nonnews_rate": 0.7428571428571429,
+    "pass_rate_by_origin": {
+      "press": 0.7575757575757576,
+      "brand": 0.5
+    },
+    "failed_case_ids": [
+      "real_1ac48a62",
+      "real_6474979c",
+      "real_64b41848",
+      "real_83067aa2",
+      "real_c7fd72f8",
+      "real_cd30cad5",
+      "real_d1c32319",
+      "real_5cbc035",
+      "newsroom_gpt6_astra"
+    ],
+    "common_issues": [
+      "NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x5)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False (CRITICAL) (x4)",
+      "Expected content_type='other', got 'opinion' (x2)",
+      "Expected content_type='report', got 'news' (x2)",
+      "Expected content_type='news', got 'opinion' (x2)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-23T15:44:37.534450+00:00",
+    "model": "openai:gpt-5.6-luna",
+    "total_tests": 35,
+    "passed_tests": 26,
+    "pass_rate": 0.7428571428571429,
+    "content_type_exact_rate": 0.5428571428571428,
+    "news_vs_nonnews_rate": 0.7428571428571429,
+    "pass_rate_by_origin": {
+      "press": 0.7272727272727273,
+      "brand": 1.0
+    },
+    "failed_case_ids": [
+      "real_1ac48a62",
+      "real_5f4ab342",
+      "real_64b41848",
+      "real_83067aa2",
+      "real_b1e42d18",
+      "real_c25bdc4f",
+      "real_c7fd72f8",
+      "real_d1c32319",
+      "real_e15a5a19"
+    ],
+    "common_issues": [
+      "NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x5)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False (CRITICAL) (x4)",
+      "Expected content_type='other', got 'opinion' (x3)",
+      "Expected content_type='news', got 'opinion' (x3)",
+      "Expected content_type='other', got 'news' (x2)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-23T15:49:07.858572+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 35,
+    "passed_tests": 29,
+    "pass_rate": 0.8285714285714286,
+    "content_type_exact_rate": 0.6571428571428571,
+    "news_vs_nonnews_rate": 0.8285714285714286,
+    "pass_rate_by_origin": {
+      "press": 0.8181818181818182,
+      "brand": 1.0
+    },
+    "failed_case_ids": [
+      "real_1ac48a62",
+      "real_6474979c",
+      "real_83067aa2",
+      "real_c7fd72f8",
+      "real_d1c32319",
+      "real_5cbc035"
+    ],
+    "common_issues": [
+      "NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x5)",
+      "Expected content_type='other', got 'opinion' (x3)",
+      "Expected content_type='report', got 'news' (x2)",
+      "Expected content_type='other', got 'news' (x2)",
+      "Expected content_type='other', got 'report' (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-23T16:57:50.688478+00:00",
+    "model": "openai:gpt-6-luna",
+    "total_tests": 35,
+    "passed_tests": 28,
+    "pass_rate": 0.8,
+    "content_type_exact_rate": 0.5428571428571428,
+    "news_vs_nonnews_rate": 0.8,
+    "pass_rate_by_origin": {
+      "press": 0.7878787878787878,
+      "brand": 1.0
+    },
+    "failed_case_ids": [
+      "real_1ac48a62",
+      "real_64b41848",
+      "real_83067aa2",
+      "real_b1e42d18",
+      "real_cd30cad5",
+      "real_d1c32319",
+      "real_e15a5a19"
+    ],
+    "common_issues": [
+      "NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False (CRITICAL) (x4)",
+      "Expected content_type='other', got 'opinion' (x3)",
+      "Expected content_type='news', got 'opinion' (x3)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x3)",
+      "Expected content_type='other', got 'news' (x2)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-23T17:45:58.469788+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 35,
+    "passed_tests": 32,
+    "pass_rate": 0.9142857142857143,
+    "content_type_exact_rate": 0.8857142857142857,
+    "news_vs_nonnews_rate": 0.9142857142857143,
+    "pass_rate_by_origin": {
+      "press": 0.9090909090909091,
+      "brand": 1.0
+    },
+    "failed_case_ids": [
+      "real_258969d7",
+      "real_6474979c",
+      "real_ad988cf1"
+    ],
+    "common_issues": [
+      "Expected content_type='news', got 'opinion' (x2)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False (CRITICAL) (x2)",
+      "Expected content_type='deal', got 'other' (x1)",
+      "Expected content_type='opinion', got 'news' (x1)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-23T17:49:08.074833+00:00",
+    "model": "openai:gpt-6-luna",
+    "total_tests": 35,
+    "passed_tests": 33,
+    "pass_rate": 0.9428571428571428,
+    "content_type_exact_rate": 0.9428571428571428,
+    "news_vs_nonnews_rate": 0.9428571428571428,
+    "pass_rate_by_origin": {
+      "press": 0.9393939393939394,
+      "brand": 1.0
+    },
+    "failed_case_ids": [
+      "real_6474979c",
+      "real_ad988cf1"
+    ],
+    "common_issues": [
+      "Expected content_type='opinion', got 'news' (x1)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x1)",
+      "Expected content_type='news', got 'opinion' (x1)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False (CRITICAL) (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-23T19:18:58.084971+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 35,
+    "passed_tests": 32,
+    "pass_rate": 0.9142857142857143,
+    "content_type_exact_rate": 0.9142857142857143,
+    "news_vs_nonnews_rate": 0.9142857142857143,
+    "pass_rate_by_origin": {
+      "press": 0.9393939393939394,
+      "brand": 0.5
+    },
+    "failed_case_ids": [
+      "real_6474979c",
+      "real_64b41848",
+      "newsroom_gpt6_astra"
+    ],
+    "common_issues": [
+      "NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False (CRITICAL) (x2)",
+      "Expected content_type='opinion', got 'news' (x1)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x1)",
+      "Expected content_type='news', got 'opinion' (x1)",
+      "Expected content_type='news', got 'review' (x1)"
+    ],
+    "usage": {
+      "calls": 35,
+      "input_tokens": 84423,
+      "cached_input_tokens": 0,
+      "output_tokens": 13943,
+      "reasoning_tokens": 4589,
+      "cost_usd": 0.034313350000000006,
+      "cost_per_call_usd": 0.0009803814285714288
+    }
+  },
+  {
+    "timestamp": "2026-09-23T19:22:31.626256+00:00",
+    "model": "openai:gpt-6-luna",
+    "total_tests": 35,
+    "passed_tests": 32,
+    "pass_rate": 0.9142857142857143,
+    "content_type_exact_rate": 0.9142857142857143,
+    "news_vs_nonnews_rate": 0.9142857142857143,
+    "pass_rate_by_origin": {
+      "press": 0.9090909090909091,
+      "brand": 1.0
+    },
+    "failed_case_ids": [
+      "real_08e8e244",
+      "real_6474979c",
+      "real_ad988cf1"
+    ],
+    "common_issues": [
+      "NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x2)",
+      "Expected content_type='report', got 'news' (x1)",
+      "Expected content_type='opinion', got 'news' (x1)",
+      "Expected content_type='news', got 'opinion' (x1)",
+      "NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False (CRITICAL) (x1)"
+    ],
+    "usage": {
+      "calls": 35,
+      "input_tokens": 84423,
+      "cached_input_tokens": 0,
+      "output_tokens": 17111,
+      "reasoning_tokens": 8763,
+      "cost_usd": 0.016997800000000004,
+      "cost_per_call_usd": 0.0004856514285714287
+    }
+  }
+]

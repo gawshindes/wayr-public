@@ -1,0 +1,8 @@
+# Sources — one per line: URL [type=rss|page] [origin=press|brand]  # comment
+# Written by onboarding as given; validate with: ./demo.sh example check
+https://techcrunch.com/feed/
+https://www.theverge.com/rss/index.xml
+https://feeds.arstechnica.com/arstechnica/technology-lab
+https://www.wired.com/feed/rss
+https://openai.com/news/rss.xml origin=brand
+https://blog.google/rss/ origin=brand

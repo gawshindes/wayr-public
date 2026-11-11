@@ -1,0 +1,202 @@
+[
+  {
+    "timestamp": "2026-04-23T02:50:51.757912+00:00",
+    "model": "anthropic:claude-haiku-4-5-20251001",
+    "total_tests": 11,
+    "passed_tests": 11,
+    "pass_rate": 1.0,
+    "primary_exact_rate": 0.6363636363636364,
+    "expected_in_predicted_rate": 1.0,
+    "full_coverage_rate": 1.0,
+    "failed_case_ids": [],
+    "common_issues": [
+      "Primary mismatch: expected 'Startup', got 'AI' (secondary: 'Startup') (x2)",
+      "Primary mismatch: expected 'General', got 'Enterprise' (secondary: 'General') (x1)",
+      "Primary mismatch: expected 'Mobile & Apps', got 'AI' (secondary: 'Mobile & Apps') (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-04-23T02:51:04.562990+00:00",
+    "model": "anthropic:claude-haiku-4-5-20251001",
+    "total_tests": 13,
+    "passed_tests": 11,
+    "pass_rate": 0.8461538461538461,
+    "primary_exact_rate": 0.46153846153846156,
+    "expected_in_predicted_rate": 0.8461538461538461,
+    "full_coverage_rate": 0.0,
+    "failed_case_ids": [
+      "real_093298ad",
+      "real_0ddc3ec2"
+    ],
+    "common_issues": [
+      "Primary mismatch: expected 'AI', got 'Enterprise' (secondary: 'AI') (x1)",
+      "Primary mismatch: expected 'Consumer Tech', got 'Startup' (secondary: 'Enterprise') (x1)",
+      "Primary mismatch: expected 'Mobile & Apps', got 'Consumer Tech' (secondary: 'AI') (x1)",
+      "Primary mismatch: expected 'AI', got 'Security & Privacy' (secondary: 'AI') (x1)",
+      "Primary mismatch: expected 'Startup', got 'AI' (secondary: 'Startup') (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-04-23T02:53:01.496526+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 11,
+    "passed_tests": 11,
+    "pass_rate": 1.0,
+    "primary_exact_rate": 0.6363636363636364,
+    "expected_in_predicted_rate": 1.0,
+    "full_coverage_rate": 1.0,
+    "failed_case_ids": [],
+    "common_issues": [
+      "Primary mismatch: expected 'Startup', got 'AI' (secondary: 'Startup') (x2)",
+      "Primary mismatch: expected 'Mobile & Apps', got 'AI' (secondary: 'Mobile & Apps') (x1)",
+      "Primary mismatch: expected 'Enterprise', got 'AI' (secondary: 'Enterprise') (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-04-23T02:53:22.179459+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 13,
+    "passed_tests": 10,
+    "pass_rate": 0.7692307692307693,
+    "primary_exact_rate": 0.5384615384615384,
+    "expected_in_predicted_rate": 0.7692307692307693,
+    "full_coverage_rate": 0.0,
+    "failed_case_ids": [
+      "real_093298ad",
+      "real_0ddc3ec2",
+      "real_19f9725e"
+    ],
+    "common_issues": [
+      "Primary mismatch: expected 'Consumer Tech', got 'Startup' (secondary: 'AI') (x1)",
+      "Primary mismatch: expected 'Mobile & Apps', got 'Consumer Tech' (secondary: 'AI') (x1)",
+      "Primary mismatch: expected 'Enterprise', got 'Security & Privacy' (secondary: 'Consumer Tech') (x1)",
+      "Primary mismatch: expected 'AI', got 'Security & Privacy' (secondary: 'AI') (x1)",
+      "Primary mismatch: expected 'Startup', got 'AI' (secondary: 'Startup') (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-04-24T05:30:27.771057+00:00",
+    "model": "anthropic:claude-haiku-4-5-20251001",
+    "total_tests": 22,
+    "passed_tests": 20,
+    "pass_rate": 0.9090909090909091,
+    "primary_exact_rate": 0.7727272727272727,
+    "expected_in_predicted_rate": 0.9090909090909091,
+    "full_coverage_rate": 0.6818181818181818,
+    "failed_case_ids": [
+      "real_1dc9eea2",
+      "real_36e1c99e"
+    ],
+    "common_issues": [
+      "Missing expected categories: ['General'] (x3)",
+      "Primary mismatch: expected 'AI', got 'Security & Privacy' (secondary: 'AI') (x2)",
+      "Missing expected categories: ['Mobile & Apps'] (x1)",
+      "Primary mismatch: expected 'Mobile & Apps', got 'Security & Privacy' (secondary: 'Enterprise') (x1)",
+      "Missing expected categories: ['AI', 'General'] (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-04-24T05:31:09.566203+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 22,
+    "passed_tests": 20,
+    "pass_rate": 0.9090909090909091,
+    "primary_exact_rate": 0.7272727272727273,
+    "expected_in_predicted_rate": 0.9090909090909091,
+    "full_coverage_rate": 0.5909090909090909,
+    "failed_case_ids": [
+      "real_1dc9eea2",
+      "real_36e1c99e"
+    ],
+    "common_issues": [
+      "Missing expected categories: ['General'] (x4)",
+      "Missing expected categories: ['Enterprise'] (x2)",
+      "Primary mismatch: expected 'AI', got 'Security & Privacy' (secondary: 'AI') (x2)",
+      "Missing expected categories: ['Enterprise', 'Mobile & Apps'] (x1)",
+      "Primary mismatch: expected 'Mobile & Apps', got 'Security & Privacy' (secondary: 'General') (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-16T14:48:31.413627+00:00",
+    "model": "openai:gpt-5.6-luna",
+    "total_tests": 11,
+    "passed_tests": 3,
+    "pass_rate": 0.2727272727272727,
+    "primary_exact_rate": 0.18181818181818182,
+    "expected_in_predicted_rate": 0.2727272727272727,
+    "full_coverage_rate": 0.0,
+    "failed_case_ids": [
+      "news_ai_001",
+      "news_hardware_001",
+      "news_startup_001",
+      "tech_policy_001",
+      "news_security_001",
+      "news_mobile_001",
+      "news_gaming_001",
+      "major_tech_hw_001"
+    ],
+    "common_issues": [
+      "Primary mismatch: expected 'Startup', got 'General' (secondary: 'General') (x2)",
+      "Primary mismatch: expected 'Hardware', got 'General' (secondary: 'General') (x2)",
+      "Missing expected categories: ['AI', 'Startup'] (x1)",
+      "Primary mismatch: expected 'AI', got 'General' (secondary: 'General') (x1)",
+      "Primary mismatch: expected 'Security & Privacy', got 'General' (secondary: 'General') (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-23T17:10:02.025855+00:00",
+    "model": "openai:gpt-6-luna",
+    "total_tests": 11,
+    "passed_tests": 2,
+    "pass_rate": 0.18181818181818182,
+    "primary_exact_rate": 0.18181818181818182,
+    "expected_in_predicted_rate": 0.18181818181818182,
+    "full_coverage_rate": 0.0,
+    "failed_case_ids": [
+      "news_ai_001",
+      "news_hardware_001",
+      "news_startup_001",
+      "tech_policy_001",
+      "news_security_001",
+      "news_mobile_001",
+      "news_enterprise_001",
+      "news_gaming_001",
+      "major_tech_hw_001"
+    ],
+    "common_issues": [
+      "Primary mismatch: expected 'Startup', got 'General' (secondary: 'General') (x2)",
+      "Primary mismatch: expected 'Hardware', got 'General' (secondary: 'General') (x2)",
+      "Missing expected categories: ['AI', 'Startup'] (x1)",
+      "Primary mismatch: expected 'AI', got 'General' (secondary: 'General') (x1)",
+      "Primary mismatch: expected 'Security & Privacy', got 'General' (secondary: 'General') (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-23T17:10:15.850058+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 11,
+    "passed_tests": 2,
+    "pass_rate": 0.18181818181818182,
+    "primary_exact_rate": 0.18181818181818182,
+    "expected_in_predicted_rate": 0.18181818181818182,
+    "full_coverage_rate": 0.0,
+    "failed_case_ids": [
+      "news_ai_001",
+      "news_hardware_001",
+      "news_startup_001",
+      "tech_policy_001",
+      "news_security_001",
+      "news_mobile_001",
+      "news_enterprise_001",
+      "news_gaming_001",
+      "major_tech_hw_001"
+    ],
+    "common_issues": [
+      "Primary mismatch: expected 'Startup', got 'General' (secondary: 'General') (x2)",
+      "Primary mismatch: expected 'Hardware', got 'General' (secondary: 'General') (x2)",
+      "Missing expected categories: ['AI', 'Startup'] (x1)",
+      "Primary mismatch: expected 'AI', got 'General' (secondary: 'General') (x1)",
+      "Primary mismatch: expected 'Security & Privacy', got 'General' (secondary: 'General') (x1)"
+    ]
+  }
+]

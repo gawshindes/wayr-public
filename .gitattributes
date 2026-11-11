@@ -1,0 +1,10 @@
+# The public release (`git archive HEAD`) carries one generic newsletter, newsletters/example/.
+# The demo newsletters and the production configuration are the author's own editorial
+# files (sources, reader criteria, voice) and stay in the private repository.
+newsletters/ai-daily     export-ignore
+newsletters/austin-local export-ignore
+newsletters/nyc-local    export-ignore
+newsletters/own-site     export-ignore
+newsletters/tech-links   export-ignore
+newsletters/wayr-daily   export-ignore
+newsletters/wayrtoday    export-ignore

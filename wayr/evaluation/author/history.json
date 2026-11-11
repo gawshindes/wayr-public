@@ -1,0 +1,68 @@
+[
+  {
+    "timestamp": "2026-04-09T20:55:20.988092+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 0,
+    "passed_tests": 0,
+    "pass_rate": 0.0,
+    "avg_word_count": 0,
+    "avg_h3_count": 0,
+    "failed_case_ids": [],
+    "common_issues": []
+  },
+  {
+    "timestamp": "2026-04-09T20:57:38.466456+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 0,
+    "passed_tests": 0,
+    "pass_rate": 0.0,
+    "avg_word_count": 0,
+    "avg_h3_count": 0,
+    "failed_case_ids": [],
+    "common_issues": []
+  },
+  {
+    "timestamp": "2026-04-09T20:58:25.688958+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 0,
+    "passed_tests": 0,
+    "pass_rate": 0.0,
+    "avg_word_count": 0,
+    "avg_h3_count": 0,
+    "failed_case_ids": [],
+    "common_issues": []
+  },
+  {
+    "timestamp": "2026-04-09T21:00:47.881942+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 6,
+    "passed_tests": 6,
+    "pass_rate": 1.0,
+    "avg_word_count": 884.0,
+    "avg_h3_count": 4.5,
+    "failed_case_ids": [],
+    "common_issues": []
+  },
+  {
+    "timestamp": "2026-04-09T21:06:28.395726+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 8,
+    "passed_tests": 8,
+    "pass_rate": 1.0,
+    "avg_word_count": 931.0,
+    "avg_h3_count": 4.25,
+    "failed_case_ids": [],
+    "common_issues": []
+  },
+  {
+    "timestamp": "2026-04-10T15:31:35.032194+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 8,
+    "passed_tests": 8,
+    "pass_rate": 1.0,
+    "avg_word_count": 793.625,
+    "avg_h3_count": 4.125,
+    "failed_case_ids": [],
+    "common_issues": []
+  }
+]

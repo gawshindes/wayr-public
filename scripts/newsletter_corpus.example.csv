@@ -1,0 +1,8 @@
+newsletter,issue_url,type,frequency,platform,notes
+# `newsletter` groups issues of the same title — stability analysis is per-group,
+# so 5 newsletters x 3 issues tells us far more than 15 one-off issues.
+# `issue_url` is required. Everything after it is optional metadata.
+neuron,https://www.theneurondaily.com/p/runway-solaris-treats-software-like-video,ai-daily,daily,beehiiv,
+neuron,https://www.theneurondaily.com/p/openclaw-2-0-is-here,ai-daily,daily,beehiiv,
+neuron,https://www.theneurondaily.com/p/nvidia-s-buying-hugging-face-for-12-9b,ai-daily,daily,beehiiv,
+technically-austin,https://technically-austin.beehiiv.com/p/entangled-by-the-airport,local-tech,weekly,beehiiv,

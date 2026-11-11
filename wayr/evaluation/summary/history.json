@@ -1,0 +1,79 @@
+[
+  {
+    "timestamp": "2026-09-16T14:49:02.709207+00:00",
+    "model": "openai:gpt-5.6-luna",
+    "total_tests": 12,
+    "passed_tests": 8,
+    "pass_rate": 0.6666666666666666,
+    "avg_char_count": 175.16666666666666,
+    "avg_sentence_count": 1.6666666666666667,
+    "failed_case_ids": [
+      "summary_enterprise_001",
+      "summary_policy_001",
+      "summary_ai_research_001",
+      "summary_long_title_001"
+    ],
+    "common_issues": [
+      "Sentence count 1 outside range [2, 3] (x4)",
+      "Character count 105 outside range [150, 320] (x2)",
+      "Character count 88 outside range [150, 320] (x1)",
+      "No key facts mentioned (expected any of: ['GPT-4 Turbo', '128K', 'fine-tune']) (x1)",
+      "No key facts mentioned (expected any of: ['AI Background', 'Llama', 'on-device']) (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-16T14:50:30.496465+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 12,
+    "passed_tests": 11,
+    "pass_rate": 0.9166666666666666,
+    "avg_char_count": 245.75,
+    "avg_sentence_count": 1.9166666666666667,
+    "failed_case_ids": [
+      "summary_startup_001"
+    ],
+    "common_issues": [
+      "No key facts mentioned (expected any of: ['$6.6 billion', 'Thrive Capital', '$157 billion']) (x1)",
+      "No key facts mentioned (expected any of: ['M4', '3nm', '120 TOPS']) (x1)",
+      "No key facts mentioned (expected any of: ['GPT-4 Turbo', '128K', 'fine-tune']) (x1)",
+      "No key facts mentioned (expected any of: ['10 million', 'CrowdStrike', 'API']) (x1)",
+      "No key facts mentioned (expected any of: ['AI Background', 'Llama', 'on-device']) (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-16T15:18:52.237733+00:00",
+    "model": "openai:gpt-5.6-luna",
+    "total_tests": 12,
+    "passed_tests": 12,
+    "pass_rate": 1.0,
+    "avg_char_count": 244.16666666666666,
+    "avg_sentence_count": 2.0,
+    "failed_case_ids": [],
+    "common_issues": [
+      "No key facts mentioned (expected any of: ['Switch 2', '4K', 'backward compatibility']) (x1)"
+    ]
+  },
+  {
+    "timestamp": "2026-09-16T15:19:54.406452+00:00",
+    "model": "openai:gpt-5.4-nano",
+    "total_tests": 12,
+    "passed_tests": 7,
+    "pass_rate": 0.5833333333333334,
+    "avg_char_count": 219.66666666666666,
+    "avg_sentence_count": 1.5,
+    "failed_case_ids": [
+      "summary_security_001",
+      "summary_policy_001",
+      "summary_startup_001",
+      "summary_consumer_001",
+      "summary_ai_research_001"
+    ],
+    "common_issues": [
+      "Character count 0 outside range [150, 320] (x3)",
+      "Sentence count 0 outside range [2, 3] (x3)",
+      "No key facts mentioned (expected any of: ['10 million', 'CrowdStrike', 'API']) (x1)",
+      "No key facts mentioned (expected any of: ['training data', '12 months', 'EU AI Act']) (x1)",
+      "Character count 336 outside range [150, 320] (x1)"
+    ]
+  }
+]

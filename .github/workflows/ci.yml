@@ -1,0 +1,101 @@
+# .github/workflows/ci.yml
+# CI for WAYR platform — runs on every push and PR to main
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install --no-interaction
+
+      - name: Lint (Ruff)
+        run: poetry run ruff check wayr/
+
+      - name: Format check (Black)
+        run: poetry run black --check wayr/
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install --no-interaction
+
+      - name: Run tests
+        run: poetry run pytest tests/ -x -q --tb=short
+
+  safety-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for unbounded loops
+        run: |
+          echo "Checking for unbounded agent loops..."
+          ISSUES=$(grep -rn "while\s*True" \
+            --include="*.py" \
+            wayr/ 2>/dev/null | grep -v "bounded-loop-ok" || true)
+          if [ -n "$ISSUES" ]; then
+            echo "Potentially unbounded loops:"
+            echo "$ISSUES"
+            echo ""
+            echo "Add maxIterations guard or '# bounded-loop-ok' comment."
+            exit 1
+          fi
+          echo "No unbounded loops found."
+
+      - name: Scan for prompt injection risks
+        run: |
+          echo "Checking for raw user input in system prompts..."
+          ISSUES=$(grep -rn \
+            'system.*f".*{.*input\|system.*f".*{.*query' \
+            --include="*.py" \
+            wayr/ 2>/dev/null || true)
+          if [ -n "$ISSUES" ]; then
+            echo "Possible prompt injection risk:"
+            echo "$ISSUES"
+            exit 1
+          fi
+          echo "No prompt injection risks found."
+
+      - name: Scan for hardcoded secrets
+        run: |
+          echo "Checking for hardcoded secrets..."
+          ISSUES=$(grep -rn \
+            'api_key\s*=\s*"[^"]\{20,\}\|secret\s*=\s*"[^"]\{20,\}\|password\s*=\s*"[^"]\{8,\}' \
+            --include="*.py" \
+            wayr/ 2>/dev/null | grep -v "test\|example\|placeholder\|xxx" || true)
+          if [ -n "$ISSUES" ]; then
+            echo "Possible hardcoded secrets:"
+            echo "$ISSUES"
+            exit 1
+          fi
+          echo "No hardcoded secrets found."

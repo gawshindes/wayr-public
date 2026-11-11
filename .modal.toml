@@ -1,0 +1,5 @@
+# Modal configuration for WAYR platform
+# This file is optional but helps with project organization
+
+[project]
+name = "wayr-platform"

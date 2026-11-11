@@ -1,0 +1,223 @@
+Running News Classifier Evaluation...
+
+Using model: openai:gpt-6-luna
+
+[09/23/26 15:18:59] INFO     Running news-classifier evaluation on   eval.py:103
+                             35 test cases...                                   
+[09/23/26 15:19:05] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+[09/23/26 15:19:06] INFO     ✓ real_05447227: predicted=opinion,     eval.py:115
+                             expected=opinion                                   
+[09/23/26 15:19:22] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✗ real_08e8e244: predicted=news,        eval.py:115
+                             expected=report                                    
+[09/23/26 15:19:27] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_0c8329c0: predicted=opinion,     eval.py:115
+                             expected=opinion                                   
+[09/23/26 15:19:31] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_0d19c608: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:19:45] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_1ac48a62: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:19:49] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_1dc9eea2: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:19:55] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_258969d7: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:20:00] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_36e1c99e: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:20:05] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_410a1d9d: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:20:10] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_469886d5: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:20:16] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_53d80670: predicted=deal,        eval.py:115
+                             expected=deal                                      
+[09/23/26 15:20:19] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_57d20f80: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:20:22] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_5d344a4b: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:20:28] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_5ed8e7b8: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:20:33] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_5f4ab342: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:20:43] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✗ real_6474979c: predicted=news,        eval.py:115
+                             expected=opinion                                   
+[09/23/26 15:20:47] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_64b41848: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:20:53] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_7b764f96: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:20:58] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_83067aa2: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:21:06] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✗ real_ad988cf1: predicted=opinion,     eval.py:115
+                             expected=news                                      
+[09/23/26 15:21:12] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_b1e42d18: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:21:17] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_b9e4cfbb: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:21:20] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_bc8ca4e1: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:21:25] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_c25bdc4f: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:21:29] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_c7fd72f8: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:21:38] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_cd30cad5: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:21:43] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_d1c32319: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:21:48] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_d3e4e99e: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:21:54] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_d43ff603: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:22:04] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_e15a5a19: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:22:10] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_f2f1dc89: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:22:14] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_fcaf30a3: predicted=news,        eval.py:115
+                             expected=news                                      
+[09/23/26 15:22:22] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ real_5cbc035: predicted=news,         eval.py:115
+                             expected=news                                      
+[09/23/26 15:22:26] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ newsroom_gpt6_astra: predicted=news,  eval.py:115
+                             expected=news                                      
+[09/23/26 15:22:31] INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     ✓ newsroom_openai_gsa_agreement:        eval.py:115
+                             predicted=news, expected=news                      
+                    INFO       origin=press: 30/33 passed            eval.py:158
+                    INFO       origin=brand: 2/2 passed              eval.py:158
+                    INFO     Usage: 35 calls · 84,423 in (0      base_eval.py:92
+                             cached) · 17,111 out (8,763                        
+                             reasoning) · cost $0.0170 ($0.49                   
+                             per 1k calls)                                      
+                    INFO     Saved evaluation history to        base_eval.py:110
+                             ~/workspac                 
+                             e/wayr-platform/wayr/evaluation/ne                 
+                             ws_classifier/history.json                         
+                    INFO     Saved 3 failed cases to             base_eval.py:58
+                             ~/workspace                
+                             /wayr-platform/wayr/evaluation/news                
+                             _classifier/failed_news_classifier_                
+                             cases.json                                         
+                    INFO                                             eval.py:216
+                             News-classifier evaluation: 32/35                  
+                             passed (91.4%)                                     
+============================================================
+NEWS_CLASSIFIER EVALUATION REPORT
+============================================================
+Model: openai:gpt-6-luna
+Total Tests: 35
+Overall: 32/35 passed (91.4%)
+
+PER-CHECK PASS RATES:
+----------------------------------------
+  content_type_correct           91.4%
+  news_vs_nonnews_correct        91.4%
+  origin=brand                   100.0%
+  origin=press                   90.9%
+
+COMMON ISSUES:
+  - NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True 
+(CRITICAL) (x2)
+  - Expected content_type='report', got 'news' (x1)
+  - Expected content_type='opinion', got 'news' (x1)
+  - Expected content_type='news', got 'opinion' (x1)
+  - NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False 
+(CRITICAL) (x1)
+
+============================================================

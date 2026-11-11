@@ -1,0 +1,45 @@
+{#- Packaged email wrapper. The issue body is the same HTML the publisher got,
+    inside a document an inbox renders well: a width-limited column, a "read on
+    the web" link to the published post, and the provider's unsubscribe link.
+    Context: body_html (Markup), web_url, unsubscribe_url, newsletter_title,
+             subject_line, date, platform_name. -#}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ subject_line or newsletter_title }}</title>
+<style>
+  body { margin:0; padding:0; background:#f4f4f5; }
+  .wrap { max-width:600px; margin:0 auto; padding:24px 16px; }
+  .card { background:#ffffff; border-radius:8px; padding:28px 28px 20px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:#18181b; font-size:16px; line-height:1.55; }
+  .card h1 { font-size:24px; margin:0 0 4px; }
+  .card h2 { font-size:18px; margin:28px 0 10px; padding-top:14px; border-top:1px solid #e4e4e7; }
+  .card h3 { font-size:17px; margin:18px 0 6px; }
+  .card p { margin:0 0 12px; }
+  .card ul { padding-left:20px; margin:0 0 12px; }
+  .card li { margin:0 0 8px; }
+  .card a { color:#1d4ed8; }
+  .card .date, .card .source, .card .read-time, .card .disclosure { color:#71717a; font-size:14px; }
+  .card .commentary { color:#3f3f46; }
+  .top { text-align:right; font-size:13px; color:#71717a; margin-bottom:12px; }
+  .foot { text-align:center; font-size:13px; color:#71717a; padding:20px 8px 0; }
+  .foot a { color:#71717a; }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#f4f4f5;">
+<div class="wrap">
+  {% if web_url %}
+  <p class="top"><a href="{{ web_url }}">Read this issue on the web</a></p>
+  {% endif %}
+  <div class="card">
+{{ body_html }}
+  </div>
+  <p class="foot">
+    {{ platform_name }} · {{ date }}
+    {% if web_url %}· <a href="{{ web_url }}">View online</a>{% endif %}
+    · <a href="{{ unsubscribe_url }}">Unsubscribe</a>
+  </p>
+</div>
+</body>
+</html>

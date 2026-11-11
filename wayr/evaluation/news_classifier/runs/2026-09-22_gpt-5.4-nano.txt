@@ -1,0 +1,102 @@
+Running News Classifier Evaluation...
+
+Using model: openai:gpt-5.4-nano
+
+[09/22/26 10:19:41] INFO     Running news-classifier evaluation on 35 test cases...                                             eval.py:102
+[09/22/26 10:19:45] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_05447227: predicted=opinion, expected=other                                                 eval.py:114
+[09/22/26 10:19:48] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_08e8e244: predicted=report, expected=other                                                  eval.py:114
+[09/22/26 10:19:51] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_0c8329c0: predicted=opinion, expected=other                                                 eval.py:114
+[09/22/26 10:19:53] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_0d19c608: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:19:57] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ real_1ac48a62: predicted=review, expected=news                                                   eval.py:114
+[09/22/26 10:20:00] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_1dc9eea2: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:02] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_258969d7: predicted=opinion, expected=opinion                                               eval.py:114
+[09/22/26 10:20:05] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_36e1c99e: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:08] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_410a1d9d: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:10] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_469886d5: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:13] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_53d80670: predicted=deal, expected=other                                                    eval.py:114
+[09/22/26 10:20:15] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_57d20f80: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:17] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_5d344a4b: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:20] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_5ed8e7b8: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:23] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_5f4ab342: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:26] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ real_6474979c: predicted=news, expected=report                                                   eval.py:114
+[09/22/26 10:20:29] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_64b41848: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:34] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_7b764f96: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:37] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ real_83067aa2: predicted=news, expected=other                                                    eval.py:114
+[09/22/26 10:20:41] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ real_ad988cf1: predicted=news, expected=other                                                    eval.py:114
+[09/22/26 10:20:47] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ real_b1e42d18: predicted=news, expected=opinion                                                  eval.py:114
+[09/22/26 10:20:50] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_b9e4cfbb: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:53] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_bc8ca4e1: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:20:58] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ real_c25bdc4f: predicted=news, expected=report                                                   eval.py:114
+[09/22/26 10:21:00] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ real_c7fd72f8: predicted=news, expected=report                                                   eval.py:114
+[09/22/26 10:21:04] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ real_cd30cad5: predicted=other, expected=news                                                    eval.py:114
+[09/22/26 10:21:07] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ real_d1c32319: predicted=news, expected=other                                                    eval.py:114
+[09/22/26 10:21:10] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_d3e4e99e: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:21:13] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_d43ff603: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:21:15] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_e15a5a19: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:21:17] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_f2f1dc89: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:21:20] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✓ real_fcaf30a3: predicted=news, expected=news                                                     eval.py:114
+[09/22/26 10:21:24] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ real_5cbc035: predicted=news, expected=non-news                                                  eval.py:114
+[09/22/26 10:21:26] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ newsroom_gpt6_astra: predicted=review, expected=news                                             eval.py:114
+[09/22/26 10:21:31] INFO     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"                _client.py:1786
+                    INFO     ✗ newsroom_openai_gsa_agreement: predicted=deal, expected=news                                     eval.py:114
+                    INFO     Saved evaluation history to                                                                    base_eval.py:75
+                             ~/wayr-platform/wayr/evaluation/news_classifier/history.json                
+                    INFO     Saved 12 failed cases to                                                                       base_eval.py:58
+                             ~/wayr-platform/wayr/evaluation/news_classifier/failed_news_                
+                             classifier_cases.json                                                                                         
+                    INFO                                                                                                        eval.py:197
+                             News-classifier evaluation: 23/35 passed (65.7%)                                                              
+============================================================
+NEWS_CLASSIFIER EVALUATION REPORT
+============================================================
+Model: openai:gpt-5.4-nano
+Total Tests: 35
+Overall: 23/35 passed (65.7%)
+
+PER-CHECK PASS RATES:
+----------------------------------------
+  content_type_correct           54.3%
+  news_vs_nonnews_correct        65.7%
+
+COMMON ISSUES:
+  - NEWS vs NON-NEWS mismatch: expected_is_news=False, predicted_is_news=True (CRITICAL) (x8)
+  - NEWS vs NON-NEWS mismatch: expected_is_news=True, predicted_is_news=False (CRITICAL) (x4)
+  - Expected content_type='report', got 'news' (x3)
+  - Expected content_type='other', got 'news' (x3)
+  - Expected content_type='other', got 'opinion' (x2)
+
+============================================================

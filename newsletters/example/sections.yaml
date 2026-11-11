@@ -1,0 +1,45 @@
+# Example Digest — a link-heavy weekday issue: every story is its own written headline
+# with a "(N minute read)" tag and a short blurb, in a fixed set of sections. No opening,
+# no commentary; the structure lives here, the tone in voice.md.
+intro: false                  # no opening paragraph; the first section starts the issue
+sections:
+  - name: Headlines & Launches
+    type: stories
+    style: feature            # written headline + "(N minute read)" + a 2–3 sentence blurb
+    tier: feature
+    max: 7
+    show_source: false
+    show_read_time: true
+    commentary: false
+
+  - name: Research & Innovation
+    type: stories
+    style: feature
+    tier: feature
+    max: 4
+    show_source: false
+    show_read_time: true
+    commentary: false
+    categories: [AI, Research, Science]
+
+  - name: Engineering & Resources
+    type: stories
+    style: feature
+    tier: feature
+    max: 6
+    show_source: false
+    show_read_time: true
+    commentary: false
+    categories: [Engineering, Developer Tools, Open Source, Cloud]
+
+  - name: Miscellaneous
+    type: stories
+    style: quick_hit          # headline only
+    tier: feature
+    max: 4
+
+  - name: Quick Links
+    type: stories
+    style: link_only          # the roundup tier: source titles, bare links
+    tier: roundup
+    max: 8

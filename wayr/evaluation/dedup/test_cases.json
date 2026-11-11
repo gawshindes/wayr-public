@@ -1,0 +1,1190 @@
+{
+  "test_cases": [
+    {
+      "id": "dedup_clear_match_001",
+      "description": "Same funding story from different sources",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "OpenAI raises $6.6B in new funding round led by Thrive Capital"
+          },
+          {
+            "index": 1,
+            "title": "Apple announces M4 chip with 3nm process technology"
+          },
+          {
+            "index": 2,
+            "title": "OpenAI bags $6.6 billion from Thrive Capital-led round at $157B valuation"
+          },
+          {
+            "index": 3,
+            "title": "Google launches Gemini 2.0 AI model with multimodal capabilities"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            2
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_no_dupes_001",
+      "description": "All different stories - should find no duplicates",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Tesla reports Q3 earnings beating analyst expectations"
+          },
+          {
+            "index": 1,
+            "title": "Meta launches new VR headset for enterprise market"
+          },
+          {
+            "index": 2,
+            "title": "GitHub Copilot adds new code review features"
+          },
+          {
+            "index": 3,
+            "title": "Samsung unveils Galaxy S26 with AI-powered camera"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_same_company_different_events",
+      "description": "Same company but different news events - should NOT group",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "OpenAI launches GPT-5 with enhanced reasoning capabilities"
+          },
+          {
+            "index": 1,
+            "title": "OpenAI raises $6.6B in funding at $157B valuation"
+          },
+          {
+            "index": 2,
+            "title": "OpenAI CEO Sam Altman testifies before Congress on AI safety"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_product_launch_variants",
+      "description": "Same product launch covered by multiple outlets",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Apple unveils iPhone 17 Pro with A19 chip and new camera system"
+          },
+          {
+            "index": 1,
+            "title": "Microsoft announces Azure AI services expansion"
+          },
+          {
+            "index": 2,
+            "title": "iPhone 17 Pro announced with redesigned camera and faster processor"
+          },
+          {
+            "index": 3,
+            "title": "Apple's new iPhone 17 Pro features A19 Bionic, 48MP cameras"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            2,
+            3
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_batch_vs_cached",
+      "description": "Batch article duplicates a cached article",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Nvidia announces next-gen Blackwell Ultra GPU architecture"
+          },
+          {
+            "index": 1,
+            "title": "Stripe raises $6.5B at record fintech valuation"
+          }
+        ],
+        "cached_titles": [
+          {
+            "index": 100,
+            "title": "Nvidia unveils Blackwell Ultra chips for AI data centers"
+          }
+        ]
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            100
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            100
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_similar_keywords_different_stories",
+      "description": "Similar AI keywords but completely different stories",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Google DeepMind publishes new research on protein folding with AI"
+          },
+          {
+            "index": 1,
+            "title": "Google Cloud adds new AI features to BigQuery data platform"
+          },
+          {
+            "index": 2,
+            "title": "Google faces antitrust lawsuit over AI dominance in search"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_acquisition_variants",
+      "description": "Same acquisition reported differently",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Databricks acquires AI startup MosaicML for $1.3B"
+          },
+          {
+            "index": 1,
+            "title": "MosaicML acquired by Databricks in deal worth $1.3 billion"
+          },
+          {
+            "index": 2,
+            "title": "Anthropic announces new Claude model with improved reasoning"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            1
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_related_but_distinct",
+      "description": "Related stories in same company but distinct events",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Twitter lays off 200 employees from its trust and safety team"
+          },
+          {
+            "index": 1,
+            "title": "Twitter's head of trust and safety resigns after layoffs"
+          },
+          {
+            "index": 2,
+            "title": "Twitter introduces new verification system for businesses"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_currency_variants",
+      "description": "Same funding with different currency/format expressions",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Indian AI startup Krutrim raises $50M Series A from Tiger Global"
+          },
+          {
+            "index": 1,
+            "title": "Krutrim bags $50 million in funding led by Tiger Global for AI development"
+          },
+          {
+            "index": 2,
+            "title": "Zerodha founder invests in new Indian fintech platform"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            1
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_roundup_vs_individual",
+      "description": "Weekly roundup should not match individual stories",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "This week in AI: funding rounds, new models, and regulatory updates"
+          },
+          {
+            "index": 1,
+            "title": "Anthropic raises $2B in new funding round"
+          },
+          {
+            "index": 2,
+            "title": "EU passes comprehensive AI regulation framework"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_three_way_match",
+      "description": "Three outlets covering same product launch",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Sony announces PlayStation 6 with custom AMD chip"
+          },
+          {
+            "index": 1,
+            "title": "PS6 revealed by Sony with next-gen AMD processor"
+          },
+          {
+            "index": 2,
+            "title": "Sony unveils PlayStation 6 console at CES 2027"
+          },
+          {
+            "index": 3,
+            "title": "Microsoft reports strong Xbox Game Pass subscriber growth"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            1,
+            2
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_empty_cached",
+      "description": "Batch with no cached titles and no duplicates",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "SpaceX Starship completes first successful orbital flight"
+          },
+          {
+            "index": 1,
+            "title": "Amazon Web Services launches new region in Southeast Asia"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [],
+        "must_not_group": [
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_ceo_same_event_different_angles",
+      "description": "Same event but different aspects covered",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Sam Altman keynote at CES 2027: AI will transform every industry"
+          },
+          {
+            "index": 1,
+            "title": "Sam Altman calls for global AI safety cooperation at CES"
+          },
+          {
+            "index": 2,
+            "title": "Sam Altman announces OpenAI's new robotics division"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [],
+        "must_not_group": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_multiple_cached_matches",
+      "description": "Multiple batch articles matching different cached articles",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Google announces Pixel 10 with Tensor G5 chip"
+          },
+          {
+            "index": 1,
+            "title": "Amazon raises Prime subscription prices globally"
+          }
+        ],
+        "cached_titles": [
+          {
+            "index": 100,
+            "title": "Google unveils Pixel 10 smartphone with new Tensor processor"
+          },
+          {
+            "index": 101,
+            "title": "Amazon Prime price increase takes effect worldwide"
+          }
+        ]
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            100
+          ],
+          [
+            1,
+            101
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            101
+          ],
+          [
+            1,
+            100
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_google_photos_clueless_vs_tryon",
+      "description": "Real RSS source titles for the Google Photos AI clothing feature — TechCrunch framed it as the 'Clueless closet', The Verge as a 'try-on feature for clothes you already have'. Same announcement, very different editorial framings. Production missed this and published twice.",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Google Photos uses AI to make the iconic closet from 'Clueless' a reality"
+          },
+          {
+            "index": 1,
+            "title": "Google Photos launches an AI try-on feature for clothes you already have"
+          },
+          {
+            "index": 2,
+            "title": "Google rolls out new search ranking update for e-commerce sites"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            1
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_google_photos_clueless_vs_tryon_cached",
+      "description": "Cross-batch variant using real RSS source titles — newly discovered TechCrunch 'Clueless closet' framing should match a previously seen Verge 'try-on for clothes you already have' framing in cache",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Google Photos uses AI to make the iconic closet from 'Clueless' a reality"
+          },
+          {
+            "index": 1,
+            "title": "Apple expands iCloud storage tiers in select regions"
+          }
+        ],
+        "cached_titles": [
+          {
+            "index": 100,
+            "title": "Google Photos launches an AI try-on feature for clothes you already have"
+          }
+        ]
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            100
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            100
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_spotify_peloton_fitness",
+      "description": "Real RSS source titles for the Spotify Peloton fitness launch — TechCrunch framed it as 'Spotify's next frontier: fitness content', The Verge as 'partnering with Peloton for guided workouts'. Same announcement, different anchors. Production missed and published twice on 2026-04-27.",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Spotify's next frontier: fitness content"
+          },
+          {
+            "index": 1,
+            "title": "Spotify is partnering with Peloton for guided workouts"
+          },
+          {
+            "index": 2,
+            "title": "Apple Music adds collaborative playlists for family plans"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            1
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_spotify_peloton_fitness_cached",
+      "description": "Cross-batch variant of the Spotify Peloton fitness duplicate — TechCrunch 'fitness content' framing in batch should match The Verge 'Peloton guided workouts' framing in cache",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Spotify's next frontier: fitness content"
+          },
+          {
+            "index": 1,
+            "title": "YouTube Music tests new lyrics translation feature"
+          }
+        ],
+        "cached_titles": [
+          {
+            "index": 100,
+            "title": "Spotify is partnering with Peloton for guided workouts"
+          }
+        ]
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            100
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            100
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_anthropic_one_claude_docs_slides",
+      "description": "Real 2026-09-16 batch with feed summaries. TechCrunch headlined 'Anthropic merges Claude chat and Cowork', The Verge 'Claude comes for Gemini with Docs and Slides' — one launch announcement, two headline anchors. Titles alone: production (gpt-5.4-nano) published both. The Verge summary names the Cowork merge.",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Anthropic merges Claude chat and Cowork in one interface",
+            "summary": "Anthropic is initially releasing these features to Pro and Max plan subscribers."
+          },
+          {
+            "index": 1,
+            "title": "Apple might make servers again to cash in on the AI rush",
+            "summary": "According to The Information, Apple is planning to get back into the server game and might just pair up with Nvidia to make it happen. Apple retired its Xserve line in 2011 and has largely left enterprise machines to other manufacturers since. But the growing demand for compute power as the AI indus"
+          },
+          {
+            "index": 2,
+            "title": "Chipotle Is Working With Palantir to Track Food Safety Risks",
+            "summary": "The burrito chain has enlisted Palantir for a platform that monitors pest incidents, employee illnesses, and other factors. The partnership comes after a nightmare summer for food safety across the US."
+          },
+          {
+            "index": 3,
+            "title": "Claude comes for Gemini with its own take on Docs and Slides",
+            "summary": "Claude is getting a pair of new tools today: Docs and Slides. They'll let you create documents and presentations through Claude chats, which you can export, edit, and share with other users. As part of the announcement, Anthropic is also simplifying how Claude chats work, merging regular chats and C"
+          },
+          {
+            "index": 4,
+            "title": "Hear why Neuralink co-founder Max Hodak says the screen era is ending at TechCrunch Disrupt 2026",
+            "summary": "At this year's Disrupt, Neuralink's co-founder Max Hodak will present a vision for screen-free interfaces that can even offer medical help. Register before September 25 to save up to $200 on your pass."
+          },
+          {
+            "index": 5,
+            "title": "How Fortell is using AI (and $163M) to crack a hearing aid monopoly",
+            "summary": "“Why do I have to beg my grandparents to put on their hearing aids, but no one has ever needed to ask me to put on my glasses?” That’s the question that drove Matthew de Jonge to spend six years building Fortell, an AI hearing aid startup that recently raised $163 million from the likes of Founders "
+          },
+          {
+            "index": 6,
+            "title": "Your ‘health age’ is fake",
+            "summary": "This is Optimizer, a weekly newsletter sent from Verge senior reviewer Victoria Song that dissects and discusses the latest gizmos and potions that swear they're going to change your life. Opt in for Optimizer here. During last week's Apple Watch announcement, I let out a distinct \"Noooo!\" in the St"
+          },
+          {
+            "index": 7,
+            "title": "Your AI agents can now control your Google Home devices",
+            "summary": "Google is launching early access to a new MCP server for Google Home, allowing AI agents like Claude, ChatGPT, and others to control connected devices, review camera summaries, and access smart home activity using natural language."
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            3
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            7
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_anthropic_one_claude_docs_slides_cached",
+      "description": "Cross-batch variant of the Anthropic 'one Claude' duplicate — Verge Docs/Slides framing in batch should match the already-published TechCrunch Cowork-merge framing in cache, with summaries on both sides.",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Claude comes for Gemini with its own take on Docs and Slides",
+            "summary": "Claude is getting a pair of new tools today: Docs and Slides. They'll let you create documents and presentations through Claude chats, which you can export, edit, and share with other users. As part of the announcement, Anthropic is also simplifying how Claude chats work, merging regular chats and C"
+          },
+          {
+            "index": 1,
+            "title": "Chipotle Is Working With Palantir to Track Food Safety Risks",
+            "summary": "The burrito chain has enlisted Palantir for a platform that monitors pest incidents, employee illnesses, and other factors. The partnership comes after a nightmare summer for food safety across the US."
+          }
+        ],
+        "cached_titles": [
+          {
+            "index": 100,
+            "title": "Anthropic merges Claude chat and Cowork in one interface",
+            "summary": "Anthropic is initially releasing these features to Pro and Max plan subscribers."
+          }
+        ]
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            100
+          ]
+        ],
+        "must_not_group": [
+          [
+            1,
+            100
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_apple_watch_listening_privacy_doc",
+      "description": "Real cross-batch miss from 2026-09-09: WIRED 'Apple Doesn't Want You to Worry About the New Apple Watch's Listening Features' was published, then The Verge 'Read the Apple document explaining how new listening features still protect your privacy' arrived and was published too. Same Apple privacy document story; the Apple Watch spec and event-roundup stories are distractors.",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Read the Apple document explaining how new listening features still protect your privacy",
+            "summary": "At Wednesday's iPhone Duo launch event, Apple announced a handful of new Siri AI Audio Intelligence features, including Siri Recap, Live Rewind, Sound Recognition, and Music Recognition. Alongside its announcement, Apple released a document laying out how it plans to balance AI \"ambient listening\" a"
+          },
+          {
+            "index": 1,
+            "title": "Apple Watch Series 12 and Apple Watch Ultra 4: Price, Specs, Release Date",
+            "summary": "Apple’s latest smartwatches—the Apple Watch Series 12 and Ultra 4, get a faster chip, expanded health tracking, and new capabilities made possible by a newly enhanced Siri."
+          },
+          {
+            "index": 2,
+            "title": "Everything Apple Announced: iPhone Duo, iPhone 18 Pro, Apple Watch, AirPods 5",
+            "summary": "The company’s September event introduced Apple’s first ever foldable iPhone, along with new iPhone 18 Pro models, updates to the Apple Watch, some AirPods, and more advances to Siri AI."
+          },
+          {
+            "index": 3,
+            "title": "iOS 27 launches on September 14th with Siri AI",
+            "summary": "Apple is launching its next iOS 27 update on Monday September 14th. The headline feature is Siri AI, the delayed AI-powered overhaul of the Siri assistant. Siri AI is rolling out with iOS 27 as a beta, available initially for English-only devices. Apple says support for French, Japanese, Korean, Por"
+          }
+        ],
+        "cached_titles": [
+          {
+            "index": 100,
+            "title": "Apple Doesn’t Want You to Worry About the New Apple Watch’s Listening Features",
+            "summary": "The new Apple Watch includes several “intelligent” listening features that have privacy and security baked in. But the protections can’t change the facts of what the tools do."
+          }
+        ]
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            100
+          ]
+        ],
+        "must_not_group": [
+          [
+            1,
+            100
+          ],
+          [
+            2,
+            100
+          ],
+          [
+            3,
+            100
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_automattic_followup_not_duplicate",
+      "description": "Follow-up story, not a duplicate: 'Automattic's board forces CEO Matt Mullenweg into leave of absence' (2026-09-10) vs 'Sources say Automattic's board is out after failed attempt to oust CEO' (2026-09-15). Same saga, distinct events five days apart. Production's cross-batch call grouped them.",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Sources say Automattic’s board is out after failed attempt to oust CEO Matt Mullenweg",
+            "summary": "Given that these departed board members were those who voted to put Mullenweg on a paid leave of absence to begin with, it makes sense that a board shakeup has taken place."
+          },
+          {
+            "index": 1,
+            "title": "OpenAI buys smartphone camera maker Glass Imaging for $300 million, report says",
+            "summary": "Glass Imaging was founded by a pair of former Apple engineers who previously led the team that developed Apple's Portrait Mode."
+          },
+          {
+            "index": 2,
+            "title": "Superhuman acquires YC-backed notetaker Fathom as productivity platforms push for agentic work",
+            "summary": "The notetaker offers a generous free plan, and that has resulted in over 400,000 monthly active users. The company said that over 1 million people have recorded meetings until now."
+          }
+        ],
+        "cached_titles": [
+          {
+            "index": 100,
+            "title": "Automattic’s board forces CEO Matt Mullenweg into leave of absence",
+            "summary": "Mullenweg said in a company Slack message that it was against his will."
+          }
+        ]
+      },
+      "expected": {
+        "duplicate_groups": [],
+        "must_not_group": [
+          [
+            0,
+            100
+          ],
+          [
+            1,
+            100
+          ],
+          [
+            2,
+            100
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_google_home_mcp_agents_mixed_summaries",
+      "description": "Same-batch duplicate production did catch on 2026-09-16: TechCrunch 'Your AI agents can now control your Google Home devices' (with feed summary) vs The Verge 'Google will now let any AI agent run your smart home' (title only). Guards that mixed summary/no-summary input still groups.",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Your AI agents can now control your Google Home devices",
+            "summary": "Google is launching early access to a new MCP server for Google Home, allowing AI agents like Claude, ChatGPT, and others to control connected devices, review camera summaries, and access smart home activity using natural language."
+          },
+          {
+            "index": 1,
+            "title": "Chipotle Is Working With Palantir to Track Food Safety Risks",
+            "summary": "The burrito chain has enlisted Palantir for a platform that monitors pest incidents, employee illnesses, and other factors. The partnership comes after a nightmare summer for food safety across the US."
+          },
+          {
+            "index": 2,
+            "title": "Anthropic merges Claude chat and Cowork in one interface",
+            "summary": "Anthropic is initially releasing these features to Pro and Max plan subscribers."
+          },
+          {
+            "index": 3,
+            "title": "Google will now let any AI agent run your smart home"
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            3
+          ]
+        ],
+        "must_not_group": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "dedup_two_launches_one_day_b1",
+      "description": "B1 day 2 (2026-09-23): Anthropic's Opus 5.5 and OpenAI's GPT-6 Sol/Luna launched the same day on the same theme (cheaper frontier models). Two companies, two events; the pieces covering both are a roundup with its own label. Muse's user milestone and Muse's 0-day are separate events too. Discovery's 136-item batch merged these; the compile-window batch must not.",
+      "input": {
+        "batch_titles": [
+          {
+            "index": 0,
+            "title": "Meta's AI agent Muse draws 500,000 users in a week along with claims it copied OpenClaw",
+            "summary": "Meta's AI agent Muse picked up more than 500,000 users in its first week and hit number one in Apple's App Store. But Meta admits the product is \"heavily inspired\" by the open-source project OpenClaw, and some of the file names and contents are nearly identical. OpenAI is already discussing a respon"
+          },
+          {
+            "index": 1,
+            "title": "Meta’s Muse AI Assistant Rolled Out With a Serious Security Flaw",
+            "summary": "Meta says it issued a fix for the Muse zero-day vulnerability that would have let attackers do “whatever” they wanted on a victim’s Mac, highlighting the inherent dangers of AI helpers."
+          },
+          {
+            "index": 2,
+            "title": "Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, and a new price war",
+            "summary": "Yesterday was Grok 4.7 ( pelicans ) and MiMo v2.6 Flash/Pro ( more pelicans ). Today Anthropic released Claude Opus 5.5, and around an hour later OpenAI released GPT-6 Sol and GPT-6 Luna. It's going to take a while to get a good read on all of these new models, but here are my impressions so far. GP"
+          },
+          {
+            "index": 3,
+            "title": "New Anthropic, OpenAI models make same promise: A little more for a lot less money",
+            "summary": "The frontier AI model race has entered its comparison shopping phase."
+          },
+          {
+            "index": 4,
+            "title": "OpenAI's GPT-6 Sol and Luna cut prices in half but barely move the needle on performance",
+            "summary": "With GPT-6 Sol and Luna, OpenAI adds two cheaper models that deliver their predecessors' performance at half the token price and take aim at Anthropic's pricier offerings. Independent analyses find little gain in actual intelligence, though, and OpenAI likely didn't see Anthropic's simultaneous laun"
+          },
+          {
+            "index": 5,
+            "title": "Anthropic and OpenAI roll out cheaper models in first release since call for slowdown",
+            "summary": "OpenAI introduced GPT-6 Sol and GPT-6 Luna. Anthropic unveiled Claude Opus 5.5."
+          },
+          {
+            "index": 6,
+            "title": "Meta admits Muse’s likeness to OpenClaw isn’t a coincidence",
+            "summary": "Meta says Muse was built from scratch, but acknowledges the AI assistant was \"heavily inspired\" by OpenClaw — down to some of its workspace filenames and content."
+          },
+          {
+            "index": 7,
+            "title": "OpenAI launches GPT-6 Sol and Luna, boasting lower cost and fewer mistakes",
+            "summary": "OpenAI is launching two new models, which it says are cut from the same cloth as Astra."
+          },
+          {
+            "index": 8,
+            "title": "Introducing GPT-6 Sol and Luna",
+            "summary": "Meet GPT-6 Sol and Luna, two models that bring frontier intelligence to everyday work with different balances of capability and cost."
+          },
+          {
+            "index": 9,
+            "title": "Claude Opus 5.5 matches Fable 5.1 performance at lower cost and promises less \"Claudish\" writing",
+            "summary": "Anthropic is launching Claude Opus 5.5, the first model in a new generation. The company says it matches Claude Fable 5.1 on most tasks while costing about 40 percent less to run than Opus 5. Anthropic's benchmarks also put it ahead of OpenAI's GPT-6 Astra on most tasks, despite being significantly "
+          },
+          {
+            "index": 10,
+            "title": "Anthropic releases Opus 5.5 with lower prices and Fable-level performance",
+            "summary": "Anthropic called it \"the strongest-performing model we've tested to date.\""
+          },
+          {
+            "index": 11,
+            "title": "Anthropic launches Claude Opus 5.5 with stricter safeguards for cybersecurity",
+            "summary": "Anthropic says its new Claude Opus 5.5 model comes with stronger safeguards in the wake of recent rogue AI hacking incidents. In an announcement on Tuesday, Anthropic says Opus 5.5 comes with improvements to certain risky behaviors, including attempts to escape the company's testing sandbox. It's th"
+          },
+          {
+            "index": 12,
+            "title": "Meta patches Muse exploit that let attackers control the AI agent",
+            "summary": "Meta has issued a patch for its Muse macOS app following the discovery of a zero-day vulnerability that could allow someone to take control of the AI agent. The bug found by security researcher Patrick Wardle utilized an undocumented Muse setting that enabled potential attackers running local code t"
+          },
+          {
+            "index": 13,
+            "title": "Muse, Meta's extraordinarily privileged AI assistant, has a serious 0-day",
+            "summary": "A simple ClickFix attack is only one way to completely hijack the new agent."
+          }
+        ],
+        "cached_titles": []
+      },
+      "expected": {
+        "duplicate_groups": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            12,
+            13
+          ],
+          [
+            2,
+            3,
+            5
+          ],
+          [
+            4,
+            7,
+            8
+          ],
+          [
+            9,
+            10,
+            11
+          ]
+        ],
+        "must_not_group": [
+          [
+            8,
+            9
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            8,
+            11
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            7,
+            10
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            6,
+            13
+          ]
+        ]
+      }
+    }
+  ]
+}

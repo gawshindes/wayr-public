@@ -1,0 +1,53 @@
+{#- Packaged default newsletter template. Email-safe HTML; Beehiiv accepts it as body_content.
+    Context: issue, newsletter_title, subject_line, intro, date, sections, story_count,
+             platform_name, ai_disclosure_notice, generated_at, llm_generated.
+    Item styles decide where the link sits — see docs/newsletter-mode-plan.md. -#}
+<div class="wayr-newsletter">
+  <h1>{{ newsletter_title }}</h1>
+  <p class="date">{{ date }}</p>
+  {% if intro %}
+  <p class="intro">{{ intro | prose }}</p>
+  {% endif %}
+
+  {% for section in sections %}
+  <h2>{{ section.name }}</h2>
+  {% if section.is_placeholder %}
+  <p class="placeholder"><em>[{{ section.name }} — add your content here]</em></p>
+  {% elif section.style == "feature" %}
+    {% for s in section.stories %}
+  <div class="story feature">
+    {% if section.spec.shows_source %}
+    <h3>{% if s.emoji %}{{ s.emoji }} {% endif %}{{ s.display_headline }}{% if section.spec.show_read_time and s.read_minutes %} <span class="read-time">({{ s.read_minutes }} minute read)</span>{% endif %}</h3>
+    {% else %}
+    <h3>{% if s.emoji %}{{ s.emoji }} {% endif %}<a href="{{ s.url }}">{{ s.display_headline }}</a>{% if section.spec.show_read_time and s.read_minutes %} <span class="read-time">({{ s.read_minutes }} minute read)</span>{% endif %}</h3>
+    {% endif %}
+    {% if s.blurb %}
+    <p>{{ s.blurb }}</p>
+    {% endif %}
+    {% if s.commentary %}
+    <p class="commentary"><em>{{ s.commentary | prose }}</em></p>
+    {% endif %}
+    {% if section.spec.shows_source %}
+    <p class="source">[<a href="{{ s.url }}">{{ s.source }}</a>]</p>
+    {% endif %}
+  </div>
+    {% endfor %}
+  {% else %}
+  <ul class="{{ section.style }}">
+    {% for s in section.stories %}
+    {% if section.style == "brief" %}
+    <li>{% if s.emoji %}{{ s.emoji }} {% endif %}<a href="{{ s.url }}">{{ s.display_anchor }}</a>{% if s.blurb %} — {{ s.blurb }}{% endif %}{% if section.spec.shows_source %} ({{ s.source }}){% endif %}</li>
+    {% elif section.style == "quick_hit" %}
+    <li>{% if s.emoji %}{{ s.emoji }} {% endif %}<a href="{{ s.url }}">{{ s.display_headline }}</a>{% if section.spec.show_read_time and s.read_minutes %} ({{ s.read_minutes }} minute read){% endif %}</li>
+    {% else %}
+    <li><a href="{{ s.url }}">{{ s.source_title }}</a>{% if section.spec.shows_source %} ({{ s.source }}){% endif %}</li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endfor %}
+
+  {% if ai_disclosure_notice %}
+  <p class="disclosure"><small>{{ ai_disclosure_notice }}</small></p>
+  {% endif %}
+</div>

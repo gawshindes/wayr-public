@@ -1,0 +1,70 @@
+[tool.poetry]
+name = "wayr-platform"
+version = "0.1.0"
+description = "AI-powered tech news aggregation platform"
+authors = ["Siddharth Gawshinde"]
+readme = "README.md"
+packages = [{include = "wayr"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = "^2.7.0"
+pydantic-settings = "^2.2.1"
+openai = "^1.30.0"
+anthropic = "0.34.0"
+feedparser = "^6.0.11"
+requests = "^2.31.0"
+requests-oauthlib = "^1.3.1"
+python-dotenv = "^1.0.1"
+aiohttp = "^3.9.5"
+beautifulsoup4 = "^4.12.3"
+newspaper3k = "^0.2.8"
+python-dateutil = "^2.9.0"
+tenacity = "^8.2.3"
+rich = "^13.7.1"
+lxml-html-clean = "^0.4.3"
+httpx = "0.27.2"
+google-genai = "^0.3.0"
+supabase = "^2.7.4"
+jinja2 = ">=3.1"
+pyyaml = ">=6.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1.1"
+pytest-asyncio = "^0.23.6"
+black = "^24.4.0"
+ruff = "^0.4.0"
+mypy = "^1.10.0"
+modal = "^1.2.0"
+types-pyyaml = "^6.0.12.20260906"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+wayr = "wayr.cli:main"
+
+[tool.pytest.ini_options]
+# scripts/ contains manual test scripts (test_*.py) that exit(1) at import
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.10"
+plugins = ["pydantic.mypy"]
+# Third-party libs without type stubs we don't want to own
+ignore_missing_imports = true
+# Start pragmatic — don't check internals of functions lacking annotations
+check_untyped_defs = false
+
+# Libraries where stubs exist as separate packages (types-requests, types-python-dateutil)
+# but we don't install them; treat their imports as untyped.
+[[tool.mypy.overrides]]
+module = ["requests", "requests.*", "dateutil", "dateutil.*", "requests_oauthlib"]
+ignore_missing_imports = true
+follow_imports = "skip"
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
