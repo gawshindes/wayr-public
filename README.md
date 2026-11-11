@@ -5,7 +5,7 @@ one audience, and ships them as a daily or weekly **newsletter** — or, in its 
 mode, as short AI-written articles on a WordPress site. Everything it publishes is labelled
 as AI-generated and links to the original source.
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 This is the code behind [wayrtoday.com](https://wayrtoday.com), which runs it in newsletter

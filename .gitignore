@@ -58,7 +58,6 @@ logs/
 *.sqlite
 
 # Poetry
-poetry.lock
 
 # Project specific
 data/
