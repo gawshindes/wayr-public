@@ -17,6 +17,7 @@ class PublishResult(BaseModel):
     external_id: str  # the post id on the target platform
     url: Optional[str] = None  # public/web URL if the platform returned one
     status: str = "draft"  # the platform's own status word, or "accepted"
+    slug: Optional[str] = None  # the post's slug, for a public URL on another host
 
 
 class NewsletterPublisher(ABC):

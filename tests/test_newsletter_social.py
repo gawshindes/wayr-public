@@ -12,7 +12,7 @@ from wayr.models.newsletter import (
     NewsletterStory,
     SectionSpec,
 )
-from wayr.services.newsletter_social import social_copy
+from wayr.services.newsletter_social import public_url, social_copy, wait_until_live
 
 
 def story(headline, blurb="", url="https://src.example/a"):
@@ -167,3 +167,61 @@ class TestPostLink:
         assert r["twitter"]["skipped"] == 1
         assert r["linkedin"]["failed"] == 1 and r["linkedin"]["error"] == "401"
         assert not (tmp_path / "linkedin_posted.json").exists()
+
+
+class TestLabelAndPublicUrl:
+    def test_label_opens_linkedin_and_tweet(self):
+        c = social_copy(issue(), "DAILY DIGEST")
+        assert c.linkedin.startswith("DAILY DIGEST · 10 Nov 2026\n\nAnthropic filed")
+        assert c.tweet == "DAILY DIGEST: Anthropic opens IPO roadshow"
+        assert social_copy(issue(), "").linkedin.startswith("Anthropic filed")
+
+    def test_public_url_from_template_and_slug(self):
+        cms = "https://cms.example.com/anthropic-opens-ipo-roadshow/"
+        assert public_url(
+            "https://example.com/{slug}", "anthropic-opens-ipo-roadshow", cms
+        ) == ("https://example.com/anthropic-opens-ipo-roadshow")
+        # slug missing: taken from the CMS link's last path segment
+        assert public_url("https://example.com/{slug}", None, cms) == (
+            "https://example.com/anthropic-opens-ipo-roadshow"
+        )
+        # no template, or a template without {slug}: the CMS link stands
+        assert public_url(None, "x", cms) == cms
+        assert public_url("https://example.com/news", "x", cms) == cms
+        assert public_url("https://example.com/{slug}", None, None) is None
+
+
+class TestWaitUntilLive:
+    @pytest.mark.asyncio
+    async def test_returns_true_once_200(self):
+        codes = iter([404, 500, 200])
+        calls = []
+
+        async def fetch(url):
+            calls.append(url)
+            return next(codes)
+
+        assert await wait_until_live("https://x/p", timeout=10, interval=0, fetch=fetch)
+        assert len(calls) == 3
+
+    @pytest.mark.asyncio
+    async def test_gives_up_at_timeout(self):
+        async def fetch(url):
+            return 404
+
+        assert (
+            await wait_until_live("https://x/p", timeout=0, interval=0, fetch=fetch)
+            is False
+        )
+
+    @pytest.mark.asyncio
+    async def test_network_errors_count_as_not_yet(self):
+        seen = []
+
+        async def fetch(url):
+            seen.append(1)
+            if len(seen) == 1:
+                raise RuntimeError("boom")
+            return 200
+
+        assert await wait_until_live("https://x/p", timeout=10, interval=0, fetch=fetch)

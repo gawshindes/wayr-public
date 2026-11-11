@@ -30,7 +30,7 @@ from wayr.models.newsletter import (
     Tier,
 )
 from wayr.mailers import NewsletterMailer, get_newsletter_mailer
-from wayr.services.newsletter_social import social_copy
+from wayr.services.newsletter_social import public_url, social_copy, wait_until_live
 from wayr.publishers import NewsletterPublisher, get_newsletter_publisher
 from wayr.services import (
     ContentExtractor,
@@ -1528,6 +1528,20 @@ class WAYROrchestrator:
                 f"id {published.external_id}"
                 + (f", {published.url}" if published.url else "")
             )
+            # Where readers see it: a draft is only reachable on the CMS; a public post
+            # may live on another host (NEWSLETTER_PUBLIC_URL_TEMPLATE).
+            reader_url = (
+                public_url(
+                    self.settings.newsletter_public_url_template,
+                    published.slug,
+                    published.url,
+                )
+                if published.status == "publish"
+                else published.url
+            )
+            if reader_url != published.url:
+                logger.info(f"  readers' URL: {reader_url}")
+            results["public_url"] = reader_url
 
             # Email the same issue to subscribers. The run is already a success —
             # the issue exists on the web and must never ship twice — so a mail
@@ -1543,7 +1557,7 @@ class WAYROrchestrator:
                     email_html = self.renderer.render_email(
                         issue,
                         html,
-                        web_url=published.url,
+                        web_url=reader_url,
                         unsubscribe_url=mailer.unsubscribe_placeholder,
                     )
                     mailed = await mailer.send(issue, email_html, deliver=deliver)
@@ -1566,13 +1580,25 @@ class WAYROrchestrator:
             # Share the issue's link. Only a public post is worth sharing: a draft
             # URL 404s for readers. Never fatal; reported like a mail failure.
             if self.social_media_agent is not None:
-                if published.status == "publish" and published.url:
-                    copy = social_copy(issue)
+                wait = self.settings.newsletter_public_url_wait_seconds
+                live = True
+                if published.status == "publish" and reader_url and wait > 0:
+                    logger.info(
+                        f"Waiting up to {wait}s for {reader_url} to answer 200 before sharing"
+                    )
+                    live = await wait_until_live(reader_url, timeout=wait)
+                    if not live:
+                        results["errors"].append(
+                            f"social: {reader_url} did not answer 200 within {wait}s; not shared"
+                        )
+                        logger.error(results["errors"][-1])
+                if published.status == "publish" and reader_url and live:
+                    copy = social_copy(issue, self.settings.newsletter_social_label)
                     logger.info("\nPosting the issue to social media")
                     logger.info("-" * 60)
                     try:
                         social = await self.social_media_agent.post_link(
-                            url=published.url,
+                            url=reader_url,
                             title=copy.title,
                             linkedin_text=copy.linkedin,
                             tweet_text=copy.tweet,
@@ -1587,7 +1613,7 @@ class WAYROrchestrator:
                     except Exception as e:  # noqa: BLE001
                         results["errors"].append(f"social: {e}")
                         logger.error(f"✗ Social posting failed: {e}")
-                else:
+                elif published.status != "publish":
                     logger.info(
                         f"Social posting skipped: post is '{published.status}', not public"
                     )

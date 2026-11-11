@@ -101,7 +101,11 @@ class WordPressNewsletterPublisher(NewsletterPublisher):
             f"WordPress: draft {post_id} ({status})" + (f" at {url}" if url else "")
         )
         return PublishResult(
-            publisher=self.name, external_id=post_id, url=url, status=status
+            publisher=self.name,
+            external_id=post_id,
+            url=url,
+            status=status,
+            slug=(post or {}).get("slug") or None,
         )
 
     async def test_connection(self) -> bool:

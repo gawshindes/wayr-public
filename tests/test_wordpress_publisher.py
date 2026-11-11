@@ -33,6 +33,7 @@ def publisher(client=None, **kw) -> WordPressNewsletterPublisher:
         "id": 1234,
         "link": "https://cms.example/?p=1234",
         "status": "draft",
+        "slug": "subject-here",
     }
     c.test_connection.return_value = True
     return WordPressNewsletterPublisher("https://cms.example", "u", "p", client=c, **kw)
@@ -161,3 +162,10 @@ class TestTags:
         p = publisher(tags=[])
         await p.publish(issue(), "<p>hi</p>")
         assert p.client.create_post.call_args.kwargs["tags"] is None
+
+
+class TestSlug:
+    @pytest.mark.asyncio
+    async def test_result_carries_the_posts_slug(self):
+        r = await publisher().publish(issue(), "<p>hi</p>")
+        assert r.slug == "subject-here"

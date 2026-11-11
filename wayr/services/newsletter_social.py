@@ -7,10 +7,12 @@ the headlines, nothing generated here — no model call, no new voice.
 
 from __future__ import annotations
 
+import asyncio
 import html
 import re
 from dataclasses import dataclass
-from typing import List
+from typing import Awaitable, Callable, List, Optional
+from urllib.parse import urlparse
 
 from wayr.models.newsletter import NewsletterIssue
 
@@ -47,12 +49,29 @@ def headlines(issue: NewsletterIssue, limit: int = MAX_HEADLINES) -> List[str]:
     return out
 
 
-def social_copy(issue: NewsletterIssue) -> SocialCopy:
+def public_url(
+    template: Optional[str], slug: Optional[str], fallback: Optional[str]
+) -> Optional[str]:
+    """The reader-facing URL of a published issue: the template with the post's slug
+    when both exist (the site is not the CMS), else the publisher's own URL."""
+    if template and "{slug}" in template:
+        if not slug and fallback:
+            slug = urlparse(fallback).path.rstrip("/").rsplit("/", 1)[-1] or None
+        if slug:
+            return template.replace("{slug}", slug)
+    return fallback
+
+
+def social_copy(issue: NewsletterIssue, label: str = "") -> SocialCopy:
     title = _plain(issue.subject_line or issue.title) or issue.title
     intro = _plain(issue.intro or "")
     heads = headlines(issue)
+    label = (label or "").strip()
 
     parts: List[str] = []
+    if label:
+        # Readers see a single-story opening otherwise; say what this is first.
+        parts.append(f"{label} · {issue.date_label}" if issue.date_label else label)
     if intro:
         parts.append(intro)
     if heads:
@@ -62,6 +81,8 @@ def social_copy(issue: NewsletterIssue) -> SocialCopy:
         linkedin = linkedin[:LINKEDIN_MAX].rsplit("\n", 1)[0]
 
     tweet = heads[0] if heads else (intro or title)
+    if label:
+        tweet = f"{label}: {tweet}"
     if len(tweet) > 150:
         tweet = tweet[:150].rsplit(" ", 1)[0] + "…"
 
@@ -77,3 +98,35 @@ def social_copy(issue: NewsletterIssue) -> SocialCopy:
     return SocialCopy(
         title=title, linkedin=linkedin, tweet=tweet, description=description
     )
+
+
+async def _status(url: str) -> int:
+    import httpx
+
+    async with httpx.AsyncClient(timeout=20, follow_redirects=True) as client:
+        return (
+            await client.get(url, headers={"User-Agent": "WAYR link check"})
+        ).status_code
+
+
+async def wait_until_live(
+    url: str,
+    timeout: float,
+    interval: float = 15.0,
+    fetch: Optional[Callable[[str], Awaitable[int]]] = None,
+) -> bool:
+    """Poll `url` until it answers 200 or `timeout` seconds pass. A site with a
+    cache in front of the CMS can take minutes to show a new post, and LinkedIn
+    builds its link card at post time from whatever the URL returns then."""
+    fetch = fetch or _status
+    deadline = asyncio.get_event_loop().time() + max(0.0, timeout)
+    while True:  # bounded-loop-ok (returns at 200 or when the deadline passes)
+        try:
+            code = await fetch(url)
+        except Exception:  # noqa: BLE001 - a network blip is "not yet"
+            code = 0
+        if code == 200:
+            return True
+        if asyncio.get_event_loop().time() + interval > deadline:
+            return False
+        await asyncio.sleep(interval)

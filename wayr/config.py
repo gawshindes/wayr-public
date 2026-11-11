@@ -518,6 +518,26 @@ class Settings(BaseSettings):
         default="Newsletter",
         description="WordPress category for newsletter drafts (wordpress publisher only)",
     )
+    newsletter_public_url_template: Optional[str] = Field(
+        default=None,
+        description=(
+            "Where readers see an issue when the site is not the CMS, with {slug}: e.g. "
+            "https://wayrtoday.com/{slug}. Used for the email's read-on-the-web link and "
+            "the social post once the post is public; otherwise the publisher's URL is used."
+        ),
+    )
+    newsletter_public_url_wait_seconds: int = Field(
+        default=0,
+        description=(
+            "Before sharing on social, wait up to this long for the readers' URL to answer "
+            "200 (a front end with a cache may take minutes to show a new post; LinkedIn "
+            "fetches the link when the post is created). 0 = share at once."
+        ),
+    )
+    newsletter_social_label: str = Field(
+        default="",
+        description="Opens every social post so readers know it is an issue, not one story: e.g. DAILY DIGEST",
+    )
     newsletter_wordpress_tags: str = Field(
         default="newsletter",
         description="Comma-separated WordPress tags on each issue post, so a front end can filter (wordpress publisher only)",
