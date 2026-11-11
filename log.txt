@@ -1,0 +1,2383 @@
+
+   pipeline   0 */2 * * *
+   prework    unscheduled (manual only)
+   newsletter unscheduled (manual only)
+💾 Using volume: wayr-data-dev
+[11/11/26 16:04:06] INFO     Initializing WAYR                orchestrator.py:88
+                             Orchestrator...                                    
+                    INFO     Pipeline mode: newsletter →      orchestrator.py:91
+                             agents: ['classification',                         
+                             'dedup', 'discovery',                              
+                             'importance', 'newsletter',                        
+                             'newsletter_mailer',                               
+                             'newsletter_publisher',                            
+                             'social', 'summary']                               
+                    INFO     Not in this mode, so these flags orchestrator.py:96
+                             have no effect: ENABLE_AUTHOR,                     
+                             ENABLE_PUBLISHING                                  
+[11/11/26 16:04:07] INFO     Loaded 337 cache entries     article_tracker.py:170
+[11/11/26 16:04:08] INFO     Feed ledger loaded: 1920 items   feed_ledger.py:115
+                             across 22 feeds                                    
+                    INFO     Supabase pipeline store        supabase_store.py:66
+                             connected (region=us).                             
+                    INFO     Deduplication Agent:            orchestrator.py:138
+                             openai:gpt-6-luna                                  
+                    WARNING  1 page source(s) not supported    rss_fetcher.py:79
+                             yet, skipped:                                      
+                             https://www.anthropic.com/news                     
+                    INFO     Industry classifier:            orchestrator.py:204
+                             openai:gpt-6-luna                                  
+                    INFO     News classifier:                orchestrator.py:207
+                             openai:gpt-6-luna                                  
+                    INFO     Category classifier:            orchestrator.py:210
+                             openai:gpt-6-luna                                  
+                    INFO     author: not built in newsletter orchestrator.py:405
+                             mode                                               
+                    INFO     proofreader: not built in       orchestrator.py:405
+                             newsletter mode                                    
+                    INFO     Summary Agent:                  orchestrator.py:269
+                             openai:gpt-6-luna                                  
+                    INFO     Importance Agent:               orchestrator.py:290
+                             openai:gpt-6-luna (reader                          
+                             criteria: file)                                    
+                    INFO     Newsletter Agent:               orchestrator.py:316
+                             openai:gpt-6-luna (voice: file)                    
+                    INFO     Newsletter structure: 3         orchestrator.py:320
+                             sections (custom schema,                           
+                             default template)                                  
+                    INFO     Newsletter publisher: wordpress orchestrator.py:331
+                    INFO     Newsletter mailer:              orchestrator.py:338
+                             resend-direct                                      
+                    INFO     publishing: not built in        orchestrator.py:405
+                             newsletter mode                                    
+                    WARNING  ⚠️  Twitter credentials not      social_media.py:94
+                             found - posting disabled                           
+                    INFO     ✓ LinkedIn posting enabled      social_media.py:105
+                             (urn:li:organization:109485136)                    
+                    INFO       ✓ Auto-refresh enabled        social_media.py:107
+                             (refresh token available)                          
+                    INFO     Social Media Agent initialized  orchestrator.py:386
+                             successfully                                       
+                    INFO     All agents initialized          orchestrator.py:396
+                             successfully                                       
+                    INFO     =============================== orchestrator.py:789
+                             =============================                      
+                    INFO     Starting WAYR Prework           orchestrator.py:790
+                    INFO     =============================== orchestrator.py:791
+                             =============================                      
+                    INFO                                     orchestrator.py:604
+                             [Step 1/3] News Discovery                          
+                    INFO     ------------------------------- orchestrator.py:605
+                             -----------------------------                      
+                    INFO     Starting news discovery...          discovery.py:98
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://techcrunch.com/feed/                       
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://techcrunch.com/feed/ → 4                   
+                             never seen, 16 already known                       
+                    INFO     Fetched 20 articles from         rss_fetcher.py:101
+                             https://techcrunch.com/feed/                       
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://www.theverge.com/rss/inde                  
+                             x.xml                                              
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://www.theverge.com/rss/ind                   
+                             ex.xml → 10 never seen, 0                          
+                             already known                                      
+                    INFO     Fetched 10 articles from         rss_fetcher.py:101
+                             https://www.theverge.com/rss/ind                   
+                             ex.xml                                             
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://arstechnica.com/feed/                      
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://arstechnica.com/feed/ →                    
+                             2 never seen, 18 already known                     
+                    INFO     Fetched 20 articles from         rss_fetcher.py:101
+                             https://arstechnica.com/feed/                      
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://www.wired.com/feed/rss                     
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://www.wired.com/feed/rss →                   
+                             24 never seen, 26 already known                    
+[11/11/26 16:04:09] INFO     Fetched 50 articles from         rss_fetcher.py:101
+                             https://www.wired.com/feed/rss                     
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://www.engadget.com/rss.xml                   
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://www.engadget.com/rss.xml                   
+                             → 7 never seen, 13 already known                   
+                    INFO     Fetched 20 articles from         rss_fetcher.py:101
+                             https://www.engadget.com/rss.xml                   
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://www.technologyreview.com/                  
+                             feed/                                              
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://www.technologyreview.com                   
+                             /feed/ → 1 never seen, 9 already                   
+                             known                                              
+                    INFO     Fetched 10 articles from         rss_fetcher.py:101
+                             https://www.technologyreview.com                   
+                             /feed/                                             
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://www.fastcompany.com/techn                  
+                             ology/rss                                          
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://www.fastcompany.com/tech                   
+                             nology/rss → 5 never seen, 15                      
+                             already known                                      
+                    INFO     Fetched 20 articles from         rss_fetcher.py:101
+                             https://www.fastcompany.com/tech                   
+                             nology/rss                                         
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://www.cnbc.com/id/19854910/                  
+                             device/rss/rss.html                                
+[11/11/26 16:04:10] INFO     Ledger:                          rss_fetcher.py:191
+                             https://www.cnbc.com/id/19854910                   
+                             /device/rss/rss.html → 6 never                     
+                             seen, 24 already known                             
+                    INFO     Fetched 30 articles from         rss_fetcher.py:101
+                             https://www.cnbc.com/id/19854910                   
+                             /device/rss/rss.html                               
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://api.theregister.com/api/v                  
+                             1/article?orderBy=published&site_                  
+                             id=2&remapper=rss                                  
+[11/11/26 16:04:11] INFO     Ledger:                          rss_fetcher.py:191
+                             https://api.theregister.com/api/                   
+                             v1/article?orderBy=published&sit                   
+                             e_id=2&remapper=rss → 12 never                     
+                             seen, 38 already known                             
+                    INFO     Fetched 50 articles from         rss_fetcher.py:101
+                             https://api.theregister.com/api/                   
+                             v1/article?orderBy=published&sit                   
+                             e_id=2&remapper=rss                                
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://9to5google.com/feed/                       
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://9to5google.com/feed/ → 5                   
+                             never seen, 95 already known                       
+                    INFO     Fetched 100 articles from        rss_fetcher.py:101
+                             https://9to5google.com/feed/                       
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://feeds.macrumors.com/MacRu                  
+                             mors-Front                                         
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://feeds.macrumors.com/MacR                   
+                             umors-Front → 6 never seen, 14                     
+                             already known                                      
+                    INFO     Fetched 20 articles from         rss_fetcher.py:101
+                             https://feeds.macrumors.com/MacR                   
+                             umors-Front                                        
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://www.bleepingcomputer.com/                  
+                             feed/                                              
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://www.bleepingcomputer.com                   
+                             /feed/ → 6 never seen, 9 already                   
+                             known                                              
+                    INFO     Fetched 15 articles from         rss_fetcher.py:101
+                             https://www.bleepingcomputer.com                   
+                             /feed/                                             
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://www.404media.co/rss/                       
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://www.404media.co/rss/ → 1                   
+                             never seen, 14 already known                       
+                    INFO     Fetched 15 articles from         rss_fetcher.py:101
+                             https://www.404media.co/rss/                       
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://the-decoder.com/feed/                      
+[11/11/26 16:04:12] INFO     Ledger:                          rss_fetcher.py:191
+                             https://the-decoder.com/feed/ →                    
+                             7 never seen, 3 already known                      
+                    INFO     Fetched 10 articles from         rss_fetcher.py:101
+                             https://the-decoder.com/feed/                      
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://spectrum.ieee.org/feeds/t                  
+                             opic/artificial-intelligence.rss                   
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://spectrum.ieee.org/feeds/                   
+                             topic/artificial-intelligence.rs                   
+                             s → 2 never seen, 28 already                       
+                             known                                              
+                    INFO     Fetched 30 articles from         rss_fetcher.py:101
+                             https://spectrum.ieee.org/feeds/                   
+                             topic/artificial-intelligence.rs                   
+                             s                                                  
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://www.apple.com/newsroom/rs                  
+                             s-feed.rss                                         
+[11/11/26 16:04:13] INFO     Feed unchanged (304), skipping:  rss_fetcher.py:149
+                             https://www.apple.com/newsroom/r                   
+                             ss-feed.rss                                        
+                    INFO     Fetched 0 articles from          rss_fetcher.py:101
+                             https://www.apple.com/newsroom/r                   
+                             ss-feed.rss                                        
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://openai.com/news/rss.xml                    
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://openai.com/news/rss.xml                    
+                             → 3 never seen, 1377 already                       
+                             known                                              
+                    INFO     Fetched 1380 articles from       rss_fetcher.py:101
+                             https://openai.com/news/rss.xml                    
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://blog.google/rss/                           
+                    INFO     Ledger: https://blog.google/rss/ rss_fetcher.py:191
+                             → 2 never seen, 18 already known                   
+                    INFO     Fetched 20 articles from         rss_fetcher.py:101
+                             https://blog.google/rss/                           
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://about.fb.com/news/feed/                    
+[11/11/26 16:04:14] INFO     Feed unchanged (304), skipping:  rss_fetcher.py:149
+                             https://about.fb.com/news/feed/                    
+                    INFO     Fetched 0 articles from          rss_fetcher.py:101
+                             https://about.fb.com/news/feed/                    
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://blogs.microsoft.com/feed/                  
+                    INFO     Feed unchanged (304), skipping:  rss_fetcher.py:149
+                             https://blogs.microsoft.com/feed                   
+                             /                                                  
+                    INFO     Fetched 0 articles from          rss_fetcher.py:101
+                             https://blogs.microsoft.com/feed                   
+                             /                                                  
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://blogs.nvidia.com/feed/                     
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://blogs.nvidia.com/feed/ →                   
+                             0 never seen, 18 already known                     
+                    INFO     Fetched 18 articles from         rss_fetcher.py:101
+                             https://blogs.nvidia.com/feed/                     
+                    INFO     Fetching RSS feed:                rss_fetcher.py:98
+                             https://aws.amazon.com/blogs/aws/                  
+                             feed/                                              
+                    INFO     Ledger:                          rss_fetcher.py:191
+                             https://aws.amazon.com/blogs/aws                   
+                             /feed/ → 0 never seen, 20                          
+                             already known                                      
+                    INFO     Fetched 20 articles from         rss_fetcher.py:101
+                             https://aws.amazon.com/blogs/aws                   
+                             /feed/                                             
+                    INFO     Total articles fetched: 1858     rss_fetcher.py:113
+                    INFO     Fetched 1858 articles from RSS     discovery.py:108
+                             feeds                                              
+                    INFO     Ledger delta: 1606 of 1858 not yet discovery.py:115
+                             admitted                                           
+                    INFO     Skipped 1503 item(s) older than    discovery.py:137
+                             36h (left unadmitted)                              
+                    INFO     Filtering out previously processed discovery.py:144
+                             articles (URL check)...                            
+                    INFO     Found 103 new articles to    article_tracker.py:425
+                             process                                            
+                    INFO     Filtering out known non-news       discovery.py:154
+                             articles...                                        
+[11/11/26 16:04:15] INFO     Recorded 103 articles at     article_tracker.py:284
+                             stage=discovered                                   
+                    INFO     Discovered 103 NEW articles        discovery.py:184
+                    INFO     LLM dedup at discovery is off in   discovery.py:188
+                             this mode; the compile's window                    
+                             dedup collapses same-event stories                 
+                             after scoring                                      
+                    INFO     Extracting full content (103       discovery.py:199
+                             articles)...                                       
+[11/11/26 16:04:43] INFO     News discovery complete            discovery.py:248
+[11/11/26 16:04:45] INFO     HTTP Request: POST                  _client.py:1038
+                             https://vwpvneuphybrqiqfkaei.supaba                
+                             se.co/rest/v1/pipeline_articles?on_                
+                             conflict=url_hash&columns=%22update                
+                             d_at%22%2C%22region%22%2C%22url_has                
+                             h%22%2C%22eligible_at%22%2C%22last_                
+                             stage%22%2C%22source_url%22%2C%22rs                
+                             s_published_at%22%2C%22raw_content%                
+                             22%2C%22rss_raw%22%2C%22source_tag%                
+                             22%2C%22title%22%2C%22source_origin                
+                             %22 "HTTP/2 201 Created"                           
+[11/11/26 16:04:47] INFO     HTTP Request: POST                  _client.py:1038
+                             https://vwpvneuphybrqiqfkaei.supaba                
+                             se.co/rest/v1/pipeline_articles?on_                
+                             conflict=url_hash&columns=%22update                
+                             d_at%22%2C%22region%22%2C%22url_has                
+                             h%22%2C%22eligible_at%22%2C%22last_                
+                             stage%22%2C%22source_url%22%2C%22rs                
+                             s_published_at%22%2C%22raw_content%                
+                             22%2C%22rss_raw%22%2C%22source_tag%                
+                             22%2C%22title%22%2C%22source_origin                
+                             %22 "HTTP/2 201 Created"                           
+                    INFO     HTTP Request: POST                  _client.py:1038
+                             https://vwpvneuphybrqiqfkaei.supaba                
+                             se.co/rest/v1/pipeline_articles?on_                
+                             conflict=url_hash&columns=%22update                
+                             d_at%22%2C%22region%22%2C%22url_has                
+                             h%22%2C%22eligible_at%22%2C%22last_                
+                             stage%22%2C%22source_url%22%2C%22rs                
+                             s_published_at%22%2C%22raw_content%                
+                             22%2C%22rss_raw%22%2C%22source_tag%                
+                             22%2C%22title%22%2C%22source_origin                
+                             %22 "HTTP/2 201 Created"                           
+                    INFO     ✓ Discovered 103 new articles   orchestrator.py:611
+                    INFO     Resuming 1 article(s) an        orchestrator.py:628
+                             earlier run discovered but                         
+                             never classified                                   
+                    WARNING  Resume: no readable text for    orchestrator.py:490
+                             'Come and Take It'; skipped                        
+                    INFO     Resumed 0 of 1 with readable    orchestrator.py:513
+                             text                                               
+                    INFO                                     orchestrator.py:659
+                             [Step 2/3] Classification                          
+                             (Industry → News Type →                            
+                             Categories)                                        
+                    INFO     ------------------------------- orchestrator.py:662
+                             -----------------------------                      
+[11/11/26 16:04:56] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Try Tabletop: Customizable, orchestrator.py:439
+                             collaborative spaces for groups                    
+                             to plan, play and do'                              
+                             belongs=True                                       
+[11/11/26 16:04:57] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google’s Tabletop AI        orchestrator.py:439
+                             experiment lets you build                          
+                             custom collaboration apps'                         
+                             belongs=True                                       
+[11/11/26 16:04:58] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'The best early Black Friday orchestrator.py:429
+                             deals you can already shop'                        
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:05:00] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Try Tabletop: Customizable, orchestrator.py:455
+                             collaborative spaces for groups                    
+                             to plan, play and do' type=news                    
+[11/11/26 16:05:03] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Try Tabletop: Customizable, orchestrator.py:458
+                             collaborative spaces for groups                    
+                             to plan, play and do'                              
+                             primary=AI secondary=General                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google’s Tabletop AI        orchestrator.py:455
+                             experiment lets you build                          
+                             custom collaboration apps'                         
+                             type=news                                          
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CoreWeave soars 23% as CEO  orchestrator.py:439
+                             reaffirms AI compute demand                        
+                             after strong Q3 report'                            
+                             belongs=True                                       
+[11/11/26 16:05:07] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google’s Tabletop AI        orchestrator.py:458
+                             experiment lets you build                          
+                             custom collaboration apps'                         
+                             primary=AI secondary=Mobile &                      
+                             Apps                                               
+[11/11/26 16:05:08] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CoreWeave CEO Intrator      orchestrator.py:439
+                             tells CNBC he has canceled his                     
+                             planned share sale program'                        
+                             belongs=True                                       
+[11/11/26 16:05:13] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CoreWeave soars 23% as CEO  orchestrator.py:455
+                             reaffirms AI compute demand                        
+                             after strong Q3 report'                            
+                             type=news                                          
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Motorola MA2 wireless       orchestrator.py:429
+                             Android Auto adapter is now                        
+                             available, but at nearly twice'                    
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:05:14] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Samsung Early Black Friday  orchestrator.py:429
+                             Event Brings Major Sales to                        
+                             Frame TVs and More'                                
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:05:15] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CoreWeave soars 23% as CEO  orchestrator.py:458
+                             reaffirms AI compute demand                        
+                             after strong Q3 report'                            
+                             primary=AI secondary=Enterprise                    
+[11/11/26 16:05:16] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CoreWeave CEO Intrator      orchestrator.py:455
+                             tells CNBC he has canceled his                     
+                             planned share sale program'                        
+                             type=news                                          
+[11/11/26 16:05:21] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CoreWeave CEO Intrator      orchestrator.py:458
+                             tells CNBC he has canceled his                     
+                             planned share sale program'                        
+                             primary=AI secondary=Enterprise                    
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Apple's touchscreen MacBook orchestrator.py:429
+                             Pro does not like to be taken                      
+                             apart' belongs=False — Rejected                    
+                             — not Software Technology                          
+[11/11/26 16:05:23] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Sharge’s eye-catching       orchestrator.py:429
+                             MacBook charger is over 25                         
+                             percent off' belongs=False —                       
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:05:25] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+[11/11/26 16:05:26] INFO      ✗ 'China’s Nvidia Honeypot     orchestrator.py:429
+                             Isn’t Surprising. Jensen Huang                     
+                             Fell for It Anyway'                                
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:05:30] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Trump wanted little Kei     orchestrator.py:429
+                             trucks for America, Toyota                         
+                             makes it happen' belongs=False                     
+                             — Rejected — not Software                          
+                             Technology                                         
+[11/11/26 16:05:34] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Hackers use AntiFox AI      orchestrator.py:439
+                             agents in AWS credential-theft                     
+                             attacks' belongs=True                              
+[11/11/26 16:05:35] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'iPhone 18 Pro Max Wins      orchestrator.py:429
+                             Battery Test Involving 32                          
+                             Smartphones' belongs=False —                       
+                             Rejected — not Software                            
+                             Technology                                         
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'You can now buy the Pixel   orchestrator.py:429
+                             Tag, cases from Bellroy &                          
+                             Spigen available' belongs=False                    
+                             — Rejected — not Software                          
+                             Technology                                         
+[11/11/26 16:05:39] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Hackers use AntiFox AI      orchestrator.py:455
+                             agents in AWS credential-theft                     
+                             attacks' type=news                                 
+[11/11/26 16:05:40] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Hackers use AntiFox AI      orchestrator.py:458
+                             agents in AWS credential-theft                     
+                             attacks' primary=Security &                        
+                             Privacy secondary=AI                               
+[11/11/26 16:05:45] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Helsing built an AI system  orchestrator.py:439
+                             that prepares targets for                          
+                             weapons systems and says ev'                       
+                             belongs=True                                       
+[11/11/26 16:05:46] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Siri co-founder backs Helix orchestrator.py:439
+                             for its voice ID tech'                             
+                             belongs=True                                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Silicon Valley Podcast      orchestrator.py:429
+                             Hosts Try to Understand Why                        
+                             Regular People Are Mad'                            
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:05:53] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Helsing built an AI system  orchestrator.py:443
+                             that prepares targets for                          
+                             weapons systems and says ev'                       
+                             type=opinion — Non-news:                           
+                             opinion                                            
+[11/11/26 16:05:55] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'eBPF Rootkits: Why          orchestrator.py:439
+                             Underground Actors Are Taking                      
+                             Notice' belongs=True                               
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Siri co-founder backs Helix orchestrator.py:455
+                             for its voice ID tech'                             
+                             type=news                                          
+[11/11/26 16:05:57] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Databricks’ new AI agent    orchestrator.py:439
+                             tells CEO Ali Ghodsi the                           
+                             unvarnished truth' belongs=True                    
+[11/11/26 16:05:59] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Siri co-founder backs Helix orchestrator.py:458
+                             for its voice ID tech'                             
+                             primary=Startup                                    
+                             secondary=Security & Privacy                       
+[11/11/26 16:06:01] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Ocarina of Time is even     orchestrator.py:429
+                             better if you use a smartphone                     
+                             app' belongs=False — Rejected —                    
+                             not Software Technology                            
+[11/11/26 16:06:04] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Databricks’ new AI agent    orchestrator.py:455
+                             tells CEO Ali Ghodsi the                           
+                             unvarnished truth' type=news                       
+[11/11/26 16:06:05] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'eBPF Rootkits: Why          orchestrator.py:443
+                             Underground Actors Are Taking                      
+                             Notice' type=deal — Non-news:                      
+                             deal                                               
+[11/11/26 16:06:08] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Databricks’ new AI agent    orchestrator.py:458
+                             tells CEO Ali Ghodsi the                           
+                             unvarnished truth' primary=AI                      
+                             secondary=Enterprise                               
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft's Patch Tuesday   orchestrator.py:439
+                             can't break stuff if it won't                      
+                             install' belongs=True                              
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google’s AlphaGenome 2      orchestrator.py:439
+                             zooms in on the cellular roots                     
+                             of disease' belongs=True                           
+[11/11/26 16:06:13] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google’s AlphaGenome 2      orchestrator.py:455
+                             zooms in on the cellular roots                     
+                             of disease' type=news                              
+[11/11/26 16:06:15] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Nvidia shares rebound as    orchestrator.py:429
+                             Jensen Huang faces scrutiny                        
+                             ahead of earnings'                                 
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:06:18] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google’s AlphaGenome 2      orchestrator.py:458
+                             zooms in on the cellular roots                     
+                             of disease' primary=AI                             
+                             secondary=General                                  
+[11/11/26 16:06:23] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft's Patch Tuesday   orchestrator.py:455
+                             can't break stuff if it won't                      
+                             install' type=news                                 
+[11/11/26 16:06:25] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Anthropic says AI is        orchestrator.py:439
+                             eroding Nvidia's CUDA lead,                        
+                             cutting an AMD chip switch                         
+                             from' belongs=True                                 
+[11/11/26 16:06:26] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Europe wants to ban 'dark   orchestrator.py:429
+                             patterns' in apps and loot                         
+                             boxes for minors' belongs=False                    
+                             — Rejected — not Software                          
+                             Technology                                         
+[11/11/26 16:06:27] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft's Patch Tuesday   orchestrator.py:458
+                             can't break stuff if it won't                      
+                             install' primary=Security &                        
+                             Privacy secondary=General                          
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'NASA asks Earthlings to     orchestrator.py:429
+                             wave as Voyager 1 reaches a                        
+                             light-day away' belongs=False —                    
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:06:32] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Anthropic says AI is        orchestrator.py:455
+                             eroding Nvidia's CUDA lead,                        
+                             cutting an AMD chip switch                         
+                             from' type=news                                    
+[11/11/26 16:06:33] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Anthropic says AI is        orchestrator.py:458
+                             eroding Nvidia's CUDA lead,                        
+                             cutting an AMD chip switch                         
+                             from' primary=AI                                   
+                             secondary=Enterprise                               
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google DeepMind just        orchestrator.py:439
+                             mathematically verified key                        
+                             parts of Signal' belongs=True                      
+[11/11/26 16:06:36] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Plurai wants to help AI     orchestrator.py:439
+                             agents work better using the                       
+                             same approach that helped g'                       
+                             belongs=True                                       
+[11/11/26 16:06:38] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google DeepMind just        orchestrator.py:455
+                             mathematically verified key                        
+                             parts of Signal' type=news                         
+[11/11/26 16:06:40] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Sony’s latest Pulse         orchestrator.py:429
+                             wireless headset packs planar                      
+                             magnetic drivers at a good pri'                    
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:06:41] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google DeepMind just        orchestrator.py:458
+                             mathematically verified key                        
+                             parts of Signal' primary=AI                        
+                             secondary=Security & Privacy                       
+[11/11/26 16:06:43] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Plurai wants to help AI     orchestrator.py:455
+                             agents work better using the                       
+                             same approach that helped g'                       
+                             type=news                                          
+[11/11/26 16:06:44] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Plurai wants to help AI     orchestrator.py:458
+                             agents work better using the                       
+                             same approach that helped g'                       
+                             primary=AI secondary=Startup                       
+[11/11/26 16:06:46] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'When Does It Actually Make  orchestrator.py:439
+                             Sense to Put AI Into Products?'                    
+                             belongs=True                                       
+[11/11/26 16:06:48] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Adobe’s AI experiments let  orchestrator.py:439
+                             you walk around in photos and                      
+                             interview your characte'                           
+                             belongs=True                                       
+[11/11/26 16:06:49] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+[11/11/26 16:06:50] INFO      ✗ 'When Does It Actually Make  orchestrator.py:443
+                             Sense to Put AI Into Products?'                    
+                             type=opinion — Non-news:                           
+                             opinion                                            
+[11/11/26 16:06:52] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Dbrand’s new Fitbit Air     orchestrator.py:429
+                             band launches as the first                         
+                             official third-party strap'                        
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:06:53] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'US data brokers are selling orchestrator.py:439
+                             half a billion dollars in RL                       
+                             training environments t'                           
+                             belongs=True                                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Adobe’s AI experiments let  orchestrator.py:455
+                             you walk around in photos and                      
+                             interview your characte'                           
+                             type=news                                          
+[11/11/26 16:06:56] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'DeepL wants real-time       orchestrator.py:439
+                             translation to finally capture                     
+                             sarcasm and mood shifts'                           
+                             belongs=True                                       
+[11/11/26 16:06:57] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Adobe’s AI experiments let  orchestrator.py:458
+                             you walk around in photos and                      
+                             interview your characte'                           
+                             primary=AI secondary=General                       
+[11/11/26 16:07:01] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'AirTag 2 4-Pack Hits Record orchestrator.py:429
+                             Low $69.99 Price Ahead of Black                    
+                             Friday' belongs=False —                            
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:07:02] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'US data brokers are selling orchestrator.py:443
+                             half a billion dollars in RL                       
+                             training environments t'                           
+                             type=report — Non-news: report                     
+[11/11/26 16:07:05] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'DeepL wants real-time       orchestrator.py:455
+                             translation to finally capture                     
+                             sarcasm and mood shifts'                           
+                             type=news                                          
+[11/11/26 16:07:10] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Rumored Apple Smart Glasses orchestrator.py:429
+                             Mentioned in Supplier's                            
+                             Earnings Briefing'                                 
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'DeepL wants real-time       orchestrator.py:458
+                             translation to finally capture                     
+                             sarcasm and mood shifts'                           
+                             primary=AI secondary=Enterprise                    
+[11/11/26 16:07:13] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Streaming is still trying   orchestrator.py:429
+                             to be TikTok' belongs=False —                      
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:07:16] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Duolingo, Strava, and       orchestrator.py:439
+                             Ticketmaster Are All Caught Up                     
+                             in EU’s New Digital Fairnes'                       
+                             belongs=True                                       
+[11/11/26 16:07:19] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Duolingo, Strava, and       orchestrator.py:455
+                             Ticketmaster Are All Caught Up                     
+                             in EU’s New Digital Fairnes'                       
+                             type=news                                          
+[11/11/26 16:07:24] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Duolingo, Strava, and       orchestrator.py:458
+                             Ticketmaster Are All Caught Up                     
+                             in EU’s New Digital Fairnes'                       
+                             primary=General                                    
+                             secondary=Security & Privacy                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'NSF’s X-Labs Program Draws  orchestrator.py:429
+                             Support From Charities and                         
+                             Investors' belongs=False —                         
+                             Rejected — not Software                            
+                             Technology                                         
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ '2013 breach at Russian      orchestrator.py:429
+                             cybercrime forum resurfaces                        
+                             with millions of victims' cre'                     
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:07:32] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Democrats are back. So is   orchestrator.py:429
+                             economist Stephanie Kelton’s                       
+                             big idea' belongs=False —                          
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:07:37] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Not everyone is loving      orchestrator.py:429
+                             their new iPhone Duo'                              
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:07:39] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'The Download: preserving    orchestrator.py:439
+                             minds and weighing open AI                         
+                             risks' belongs=True                                
+[11/11/26 16:07:42] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'I asked every TV            orchestrator.py:429
+                             manufacturer 17 questions about                    
+                             how they spy on you'                               
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:07:44] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft's Automatic Super orchestrator.py:439
+                             Resolution is now officially                       
+                             out for the ROG Xbox Al'                           
+                             belongs=True                                       
+[11/11/26 16:07:45] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Grok-built apps exposed     orchestrator.py:439
+                             patient data, plaintext                            
+                             passwords, and SpaceXSI's own                      
+                             sa' belongs=True                                   
+[11/11/26 16:07:49] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft's Automatic Super orchestrator.py:455
+                             Resolution is now officially                       
+                             out for the ROG Xbox Al'                           
+                             type=news                                          
+[11/11/26 16:07:50] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'The Download: preserving    orchestrator.py:443
+                             minds and weighing open AI                         
+                             risks' type=other — Non-news:                      
+                             other                                              
+[11/11/26 16:07:51] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Grok-built apps exposed     orchestrator.py:455
+                             patient data, plaintext                            
+                             passwords, and SpaceXSI's own                      
+                             sa' type=news                                      
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft's Automatic Super orchestrator.py:458
+                             Resolution is now officially                       
+                             out for the ROG Xbox Al'                           
+                             primary=Gaming                                     
+                             secondary=General                                  
+[11/11/26 16:07:52] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Grok-built apps exposed     orchestrator.py:458
+                             patient data, plaintext                            
+                             passwords, and SpaceXSI's own                      
+                             sa' primary=Security & Privacy                     
+                             secondary=AI                                       
+[11/11/26 16:07:53] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Apple tells its Support     orchestrator.py:439
+                             Community to STFU' belongs=True                    
+[11/11/26 16:07:58] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Android Auto is getting a   orchestrator.py:439
+                             Gemini upgrade, but only if you                    
+                             use a Pixel' belongs=True                          
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Apple tells its Support     orchestrator.py:455
+                             Community to STFU' type=news                       
+[11/11/26 16:08:00] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'A Grok vibe-coding agent    orchestrator.py:439
+                             leaked sensitive SpaceXSI data'                    
+                             belongs=True                                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'N-able releases security    orchestrator.py:439
+                             hotfixes for zero-day                              
+                             vulnerabilities' belongs=True                      
+[11/11/26 16:08:01] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Apple tells its Support     orchestrator.py:458
+                             Community to STFU'                                 
+                             primary=Mobile & Apps                              
+                             secondary=General                                  
+[11/11/26 16:08:05] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'N-able releases security    orchestrator.py:455
+                             hotfixes for zero-day                              
+                             vulnerabilities' type=news                         
+[11/11/26 16:08:06] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'A Grok vibe-coding agent    orchestrator.py:455
+                             leaked sensitive SpaceXSI data'                    
+                             type=news                                          
+[11/11/26 16:08:07] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'N-able releases security    orchestrator.py:458
+                             hotfixes for zero-day                              
+                             vulnerabilities'                                   
+                             primary=Security & Privacy                         
+                             secondary=Enterprise                               
+[11/11/26 16:08:08] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'A Grok vibe-coding agent    orchestrator.py:458
+                             leaked sensitive SpaceXSI data'                    
+                             primary=Security & Privacy                         
+                             secondary=AI                                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Android Auto is getting a   orchestrator.py:455
+                             Gemini upgrade, but only if you                    
+                             use a Pixel' type=news                             
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Best Indoor Garden Systems  orchestrator.py:429
+                             I’ve Been Testing for Years                        
+                             (2026)' belongs=False —                            
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:08:11] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Android Auto is getting a   orchestrator.py:458
+                             Gemini upgrade, but only if you                    
+                             use a Pixel' primary=AI                            
+                             secondary=Mobile & Apps                            
+[11/11/26 16:08:16] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Shipping giant Maersk       orchestrator.py:429
+                             probes 'IT security incident,'                     
+                             data theft' belongs=False —                        
+                             Rejected — not Software                            
+                             Technology                                         
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'How Portland is spending    orchestrator.py:429
+                             its tax on billion-dollar                          
+                             companies' belongs=False —                         
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:08:18] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Enterprise sales push       orchestrator.py:439
+                             OpenAI's quarterly revenue to                      
+                             $10 billion, though it still'                      
+                             belongs=True                                       
+[11/11/26 16:08:20] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Exclusive: Your Smartphone  orchestrator.py:429
+                             Camera Could Get a Big Upgrade                     
+                             With This Tech' belongs=False —                    
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:08:22] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ '2027 Chevrolet Bolt Review: orchestrator.py:429
+                             RIP to the GOAT of low-cost                        
+                             electric motoring'                                 
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:08:29] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Enterprise sales push       orchestrator.py:455
+                             OpenAI's quarterly revenue to                      
+                             $10 billion, though it still'                      
+                             type=news                                          
+[11/11/26 16:08:30] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'UK regulator threatens      orchestrator.py:429
+                             universities with sanctions                        
+                             unless they adopt AI-proof ex'                     
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CoreWeave provides silver   orchestrator.py:439
+                             lining for neoclouds as Nvidia                     
+                             storm swirls' belongs=True                         
+[11/11/26 16:08:32] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Enterprise sales push       orchestrator.py:458
+                             OpenAI's quarterly revenue to                      
+                             $10 billion, though it still'                      
+                             primary=AI secondary=Enterprise                    
+[11/11/26 16:08:37] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Best OLED TVs of 2026: LG,  orchestrator.py:429
+                             Samsung, Sony, and More'                           
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:08:39] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Apple Chip Supplier TSMC    orchestrator.py:429
+                             Approves $1 Billion AI                             
+                             Investment' belongs=False —                        
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:08:42] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google gooses Python AI     orchestrator.py:439
+                             performance by... removing                         
+                             Python' belongs=True                               
+[11/11/26 16:08:45] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft fixes audio       orchestrator.py:439
+                             issues caused by September                         
+                             security updates' belongs=True                     
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CoreWeave provides silver   orchestrator.py:455
+                             lining for neoclouds as Nvidia                     
+                             storm swirls' type=news                            
+[11/11/26 16:08:47] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Michigan Residents Voted to orchestrator.py:429
+                             Get Corporate Money Out of                         
+                             Politics. Now Utilities A'                         
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google gooses Python AI     orchestrator.py:455
+                             performance by... removing                         
+                             Python' type=news                                  
+[11/11/26 16:08:48] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CoreWeave provides silver   orchestrator.py:458
+                             lining for neoclouds as Nvidia                     
+                             storm swirls' primary=AI                           
+                             secondary=Startup                                  
+[11/11/26 16:08:50] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google gooses Python AI     orchestrator.py:458
+                             performance by... removing                         
+                             Python' primary=AI                                 
+                             secondary=Enterprise                               
+[11/11/26 16:08:51] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft fixes audio       orchestrator.py:455
+                             issues caused by September                         
+                             security updates' type=news                        
+[11/11/26 16:08:55] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'The smartphone isn’t dead.  orchestrator.py:439
+                             But the battle to replace it is                    
+                             already on' belongs=True                           
+[11/11/26 16:08:56] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft fixes audio       orchestrator.py:458
+                             issues caused by September                         
+                             security updates'                                  
+                             primary=General                                    
+                             secondary=Enterprise                               
+[11/11/26 16:08:58] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Best Air Purifiers (2026):  orchestrator.py:429
+                             Tested Picks for Every Room'                       
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:08:59] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'The smartphone isn’t dead.  orchestrator.py:443
+                             But the battle to replace it is                    
+                             already on' type=opinion —                         
+                             Non-news: opinion                                  
+[11/11/26 16:09:05] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Apple is shutting down its  orchestrator.py:429
+                             online Support Community on                        
+                             November 20' belongs=False —                       
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:09:08] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Even Realities glasses are  orchestrator.py:439
+                             coming to a job site near you'                     
+                             belongs=True                                       
+[11/11/26 16:09:12] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'A 13-Year-Old Asked AI      orchestrator.py:439
+                             About Suicide on Her School                        
+                             Laptop. It Didn’t Get Flagged'                     
+                             belongs=True                                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Linux joins Heathrow's      orchestrator.py:439
+                             grounded fleet of information                      
+                             screens' belongs=True                              
+[11/11/26 16:09:13] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'A New Benchmark for         orchestrator.py:429
+                             De-Aging Comes From Slowly                         
+                             Turning Back Cells’ Clocks'                        
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Even Realities glasses are  orchestrator.py:455
+                             coming to a job site near you'                     
+                             type=news                                          
+[11/11/26 16:09:17] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Even Realities glasses are  orchestrator.py:458
+                             coming to a job site near you'                     
+                             primary=Enterprise                                 
+                             secondary=Mobile & Apps                            
+[11/11/26 16:09:20] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'A 13-Year-Old Asked AI      orchestrator.py:455
+                             About Suicide on Her School                        
+                             Laptop. It Didn’t Get Flagged'                     
+                             type=news                                          
+[11/11/26 16:09:22] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CISA flags Cisco BroadWorks orchestrator.py:439
+                             flaw as actively exploited in                      
+                             attacks' belongs=True                              
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'A 13-Year-Old Asked AI      orchestrator.py:458
+                             About Suicide on Her School                        
+                             Laptop. It Didn’t Get Flagged'                     
+                             primary=AI secondary=Security &                    
+                             Privacy                                            
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Linux joins Heathrow's      orchestrator.py:443
+                             grounded fleet of information                      
+                             screens' type=opinion —                            
+                             Non-news: opinion                                  
+[11/11/26 16:09:27] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Early Black Friday Deals    orchestrator.py:429
+                             Under $100 (2026)'                                 
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:09:29] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CISA flags Cisco BroadWorks orchestrator.py:455
+                             flaw as actively exploited in                      
+                             attacks' type=news                                 
+[11/11/26 16:09:31] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Make Apple Watch Listen for orchestrator.py:439
+                             Sounds Like the Doorbell'                          
+                             belongs=True                                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'CISA flags Cisco BroadWorks orchestrator.py:458
+                             flaw as actively exploited in                      
+                             attacks' primary=Security &                        
+                             Privacy secondary=AI                               
+[11/11/26 16:09:32] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'This former Facebook        orchestrator.py:439
+                             employee wants to show AI in                       
+                             all its glory—and all its flaw'                    
+                             belongs=True                                       
+[11/11/26 16:09:36] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Make Apple Watch Listen for orchestrator.py:443
+                             Sounds Like the Doorbell'                          
+                             type=other — Non-news: other                       
+[11/11/26 16:09:37] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'The Best iPad to Buy (and   orchestrator.py:429
+                             What to Avoid) in 2026: Air,                       
+                             Pro, Mini' belongs=False —                         
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:09:38] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'LinkedIn Is Testing a       orchestrator.py:439
+                             Feature That Lets You See Your                     
+                             Profile Stalkers' belongs=True                     
+[11/11/26 16:09:41] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'This former Facebook        orchestrator.py:443
+                             employee wants to show AI in                       
+                             all its glory—and all its flaw'                    
+                             type=opinion — Non-news:                           
+                             opinion                                            
+[11/11/26 16:09:45] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ '‘They don’t understand      orchestrator.py:439
+                             hackers’: Cybersecurity pros                       
+                             explain why everyone panicki'                      
+                             belongs=True                                       
+[11/11/26 16:09:46] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'LinkedIn Is Testing a       orchestrator.py:455
+                             Feature That Lets You See Your                     
+                             Profile Stalkers' type=news                        
+[11/11/26 16:09:47] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'AMD: Where we're going we   orchestrator.py:439
+                             don't need (as much) DRAM'                         
+                             belongs=True                                       
+[11/11/26 16:09:49] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'LinkedIn Is Testing a       orchestrator.py:458
+                             Feature That Lets You See Your                     
+                             Profile Stalkers'                                  
+                             primary=Security & Privacy                         
+                             secondary=Mobile & Apps                            
+[11/11/26 16:09:51] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ '‘They don’t understand      orchestrator.py:443
+                             hackers’: Cybersecurity pros                       
+                             explain why everyone panicki'                      
+                             type=opinion — Non-news:                           
+                             opinion                                            
+[11/11/26 16:09:52] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Lucid CEO says the company  orchestrator.py:429
+                             didn't know where its own cars                     
+                             were' belongs=False — Rejected                     
+                             — not Software Technology                          
+[11/11/26 16:09:59] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft fixes Exchange    orchestrator.py:439
+                             sign-ins broken by Windows                         
+                             Server updates' belongs=True                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'AMD: Where we're going we   orchestrator.py:455
+                             don't need (as much) DRAM'                         
+                             type=news                                          
+[11/11/26 16:10:01] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'UK's 'buy British' tech     orchestrator.py:439
+                             ambitions hit reality as less                      
+                             than £1 in £6 stays at hom'                        
+                             belongs=True                                       
+[11/11/26 16:10:02] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'AMD: Where we're going we   orchestrator.py:458
+                             don't need (as much) DRAM'                         
+                             primary=Enterprise secondary=AI                    
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Experience the art and      orchestrator.py:429
+                             legacy of Dr. Esther Mahlangu'                     
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:10:05] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft fixes Exchange    orchestrator.py:455
+                             sign-ins broken by Windows                         
+                             Server updates' type=news                          
+[11/11/26 16:10:08] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'UK's 'buy British' tech     orchestrator.py:455
+                             ambitions hit reality as less                      
+                             than £1 in £6 stays at hom'                        
+                             type=news                                          
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Microsoft fixes Exchange    orchestrator.py:458
+                             sign-ins broken by Windows                         
+                             Server updates'                                    
+                             primary=Enterprise                                 
+                             secondary=Security & Privacy                       
+[11/11/26 16:10:10] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'UK's 'buy British' tech     orchestrator.py:458
+                             ambitions hit reality as less                      
+                             than £1 in £6 stays at hom'                        
+                             primary=Enterprise secondary=AI                    
+[11/11/26 16:10:11] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'ChatGPT Plus for veterans   orchestrator.py:439
+                             and servicemembers'                                
+                             belongs=True                                       
+[11/11/26 16:10:13] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Nvidia’s crisis has         orchestrator.py:429
+                             corporate governance experts                       
+                             reaching for the popcorn'                          
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:10:18] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Investors pivot to          orchestrator.py:429
+                             defensive stocks as markets                        
+                             enter a ‘state of alert’'                          
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:10:20] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Best Buy Discount Codes:    orchestrator.py:429
+                             60% Off' belongs=False —                           
+                             Rejected — not Software                            
+                             Technology                                         
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'ChatGPT Plus for veterans   orchestrator.py:455
+                             and servicemembers' type=news                      
+[11/11/26 16:10:21] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Samsung Gallery now syncs   orchestrator.py:439
+                             with Google to back up your                        
+                             photos' belongs=True                               
+[11/11/26 16:10:24] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'ChatGPT Plus for veterans   orchestrator.py:458
+                             and servicemembers' primary=AI                     
+                             secondary=General                                  
+[11/11/26 16:10:26] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Samsung Gallery now syncs   orchestrator.py:455
+                             with Google to back up your                        
+                             photos' type=news                                  
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Home Depot Promo Codes: 30% orchestrator.py:429
+                             Off in November 2026'                              
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:10:28] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Ulta Promo Codes: Up to 20% orchestrator.py:429
+                             Off in November 2026'                              
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Samsung Gallery now syncs   orchestrator.py:458
+                             with Google to back up your                        
+                             photos' primary=Mobile & Apps                      
+                             secondary=General                                  
+[11/11/26 16:10:31] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'NordVPN Coupons: 75% Off,   orchestrator.py:439
+                             Plus 3 Months Free in November                     
+                             2026' belongs=True                                 
+[11/11/26 16:10:33] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Google Workspace Promo      orchestrator.py:439
+                             Codes: 14% Off for November                        
+                             2026' belongs=True                                 
+[11/11/26 16:10:34] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'NordVPN Coupons: 75% Off,   orchestrator.py:443
+                             Plus 3 Months Free in November                     
+                             2026' type=deal — Non-news:                        
+                             deal                                               
+[11/11/26 16:10:38] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'OnePlus Promo Codes: 30%    orchestrator.py:429
+                             Off November 2026'                                 
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Google Workspace Promo      orchestrator.py:443
+                             Codes: 14% Off for November                        
+                             2026' type=deal — Non-news:                        
+                             deal                                               
+[11/11/26 16:10:39] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Noom Promo Codes: 50% Off   orchestrator.py:429
+                             Best Deals for November 2026'                      
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:10:42] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Visible Promo Codes and     orchestrator.py:429
+                             Coupons for November 2026'                         
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:10:44] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Factor Promo Code: 50% Off  orchestrator.py:429
+                             Off Meal Prep' belongs=False —                     
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:10:47] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Squarespace Promo Codes:    orchestrator.py:439
+                             20% Off in November 2026'                          
+                             belongs=True                                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Vivid Seats Promo Codes and orchestrator.py:429
+                             Deals: Get 10% Off'                                
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+[11/11/26 16:10:51] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'T-Mobile Promo Codes: 25%   orchestrator.py:429
+                             Off | November 2026'                               
+                             belongs=False — Rejected — not                     
+                             Software Technology                                
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Squarespace Promo Codes:    orchestrator.py:443
+                             20% Off in November 2026'                          
+                             type=deal — Non-news: deal                         
+[11/11/26 16:10:53] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'OpenAI builds a kill switch orchestrator.py:439
+                             for its research models'                           
+                             belongs=True                                       
+[11/11/26 16:10:56] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'U.S., China should ‘harbor  orchestrator.py:429
+                             no illusions’ as they                              
+                             cooperate, compete on AI,                          
+                             Besse' belongs=False — Rejected                    
+                             — not Software Technology                          
+[11/11/26 16:11:00] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'OpenAI builds a kill switch orchestrator.py:455
+                             for its research models'                           
+                             type=news                                          
+[11/11/26 16:11:01] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Australia may make          orchestrator.py:439
+                             knowingly selling unsafe AI a                      
+                             crime' belongs=True                                
+[11/11/26 16:11:03] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'OpenAI builds a kill switch orchestrator.py:458
+                             for its research models'                           
+                             primary=AI secondary=Security &                    
+                             Privacy                                            
+[11/11/26 16:11:07] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'Singapore Airlines elevates orchestrator.py:429
+                             travel & work with OpenAI                          
+                             technology' belongs=False —                        
+                             Rejected — not Software                            
+                             Technology                                         
+[11/11/26 16:11:10] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Australia may make          orchestrator.py:455
+                             knowingly selling unsafe AI a                      
+                             crime' type=news                                   
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'How AI Helps Recyclers Turn orchestrator.py:439
+                             Mixed Waste Into Reusable                          
+                             Material' belongs=True                             
+[11/11/26 16:11:11] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✓ 'Australia may make          orchestrator.py:458
+                             knowingly selling unsafe AI a                      
+                             crime' primary=AI                                  
+                             secondary=Security & Privacy                       
+[11/11/26 16:11:16] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      ✗ 'How AI Helps Recyclers Turn orchestrator.py:443
+                             Mixed Waste Into Reusable                          
+                             Material' type=other —                             
+                             Non-news: other                                    
+                    INFO     Classification funnel: 103      orchestrator.py:706
+                             discovered → industry rejected:                    
+                             53, non-news: {'opinion': 6,                       
+                             'deal': 4, 'report': 1,                            
+                             'other': 3}, news: 36                              
+                    INFO     Recorded classification for  article_tracker.py:342
+                             103 articles                                       
+[11/11/26 16:11:18] INFO     HTTP Request: POST                  _client.py:1038
+                             https://vwpvneuphybrqiqfkaei.supaba                
+                             se.co/rest/v1/pipeline_articles?on_                
+                             conflict=url_hash&columns=%22news_c                
+                             lassification%22%2C%22updated_at%22                
+                             %2C%22url_hash%22%2C%22categories%2                
+                             2%2C%22last_stage%22%2C%22industry_                
+                             classification%22%2C%22article_type                
+                             %22%2C%22status%22 "HTTP/2 200 OK"                 
+                    INFO     HTTP Request: POST                  _client.py:1038
+                             https://vwpvneuphybrqiqfkaei.supaba                
+                             se.co/rest/v1/pipeline_articles?on_                
+                             conflict=url_hash&columns=%22news_c                
+                             lassification%22%2C%22updated_at%22                
+                             %2C%22url_hash%22%2C%22categories%2                
+                             2%2C%22last_stage%22%2C%22industry_                
+                             classification%22%2C%22article_type                
+                             %22%2C%22status%22 "HTTP/2 200 OK"                 
+[11/11/26 16:11:19] INFO     HTTP Request: POST                  _client.py:1038
+                             https://vwpvneuphybrqiqfkaei.supaba                
+                             se.co/rest/v1/pipeline_articles?on_                
+                             conflict=url_hash&columns=%22news_c                
+                             lassification%22%2C%22updated_at%22                
+                             %2C%22url_hash%22%2C%22categories%2                
+                             2%2C%22last_stage%22%2C%22industry_                
+                             classification%22%2C%22article_type                
+                             %22%2C%22status%22 "HTTP/2 200 OK"                 
+                    INFO                                     orchestrator.py:748
+                             [Step 3/3] Importance Scoring                      
+                    INFO     ------------------------------- orchestrator.py:749
+                             -----------------------------                      
+[11/11/26 16:11:25] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Try Tabletop:            orchestrator.py:730
+                             Customizable, collaborative                        
+                             spaces for groups to plan, p' —                    
+                             This is a confirmed Google                         
+                             launch, but Tabletop is a                          
+                             waitlisted experiment for a                        
+                             narrow se                                          
+[11/11/26 16:11:26] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'CoreWeave CEO Intrator   orchestrator.py:730
+                             tells CNBC he has canceled his                     
+                             planned share sa' — Intrator’s                     
+                             decision is a notable signal                       
+                             for CoreWeave investors,                           
+                             especially after substant                          
+[11/11/26 16:11:28] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'CoreWeave soars 23% as   orchestrator.py:730
+                             CEO reaffirms AI compute demand                    
+                             after strong Q3' — The results                     
+                             and guidance add a useful                          
+                             signal about demand and                            
+                             financing for AI infrastruct                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'Google’s Tabletop AI     orchestrator.py:730
+                             experiment lets you build                          
+                             custom collaboration ap' — A                       
+                             notable Google AI experiment,                      
+                             but the waitlist-only beta and                     
+                             everyday planning use cases                        
+[11/11/26 16:11:33] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'Databricks’ new AI agent orchestrator.py:730
+                             tells CEO Ali Ghodsi the                           
+                             unvarnished truth' — This is a                     
+                             notable enterprise-AI feature                      
+                             update from Databricks, but its                    
+                             direct relevance i                                 
+[11/11/26 16:11:34] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Siri co-founder backs    orchestrator.py:730
+                             Helix for its voice ID tech' —                     
+                             The idea sits at the                               
+                             intersection of AI bots,                           
+                             privacy, and age verification,                     
+                             but Helix is                                       
+[11/11/26 16:11:36] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'Hackers use AntiFox AI   orchestrator.py:730
+                             agents in AWS credential-theft                     
+                             attacks' — Confirmed intrusions                    
+                             and practical AWS hunting                          
+                             advice make this worth a brief                     
+                             mention, but                                       
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'Google’s AlphaGenome 2   orchestrator.py:730
+                             zooms in on the cellular roots                     
+                             of disease' — This is a notable                    
+                             Google AI research release with                    
+                             potential long-term scientific                     
+                             value, bu                                          
+[11/11/26 16:11:41] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.60 'Anthropic says AI is     orchestrator.py:730
+                             eroding Nvidia's CUDA lead,                        
+                             cutting an AMD chip s' —                           
+                             Anthropic’s claim points to a                      
+                             potentially meaningful erosion                     
+                             of Nvidia’s CUDA advantage, a                      
+[11/11/26 16:11:42] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Plurai wants to help AI  orchestrator.py:730
+                             agents work better using the                       
+                             same approach tha' — This is a                     
+                             relevant experiment in a                           
+                             persistent AI problem, but it                      
+                             is an early-stage company                          
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'Google DeepMind just     orchestrator.py:730
+                             mathematically verified key                        
+                             parts of Signal' — This is a                       
+                             notable validation milestone                       
+                             for cryptography behind widely                     
+                             used messaging servi                               
+[11/11/26 16:11:44] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'Microsoft's Patch        orchestrator.py:730
+                             Tuesday can't break stuff if it                    
+                             won't install' — Windows users                     
+                             should know that some are                          
+                             having trouble applying a                          
+                             security patch addressin                           
+[11/11/26 16:11:46] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.70 'Duolingo, Strava, and    orchestrator.py:730
+                             Ticketmaster Are All Caught Up                     
+                             in EU’s New Digit' — This is a                     
+                             broad, official regulatory                         
+                             proposal touching familiar                         
+                             digital products and poten                         
+[11/11/26 16:11:47] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'DeepL wants real-time    orchestrator.py:730
+                             translation to finally capture                     
+                             sarcasm and mood ' — Aure adds                     
+                             a notable capability to DeepL’s                    
+                             translation products,                              
+                             especially by conveying mo                         
+[11/11/26 16:11:50] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Adobe’s AI experiments   orchestrator.py:730
+                             let you walk around in photos                      
+                             and interview you' —                               
+                             Interesting AI experiments from                    
+                             a major creative-software                          
+                             company, but none are available                    
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Microsoft's Automatic    orchestrator.py:730
+                             Super Resolution is now                            
+                             officially out for the R' — The                    
+                             official rollout brings                            
+                             meaningful improvements for                        
+                             owners of a small set of gaming                    
+                             de                                                 
+[11/11/26 16:11:53] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Apple tells its Support  orchestrator.py:730
+                             Community to STFU' — Apple is                      
+                             ending a long-running                              
+                             peer-support forum, so users                       
+                             who relied on it will need ano                     
+[11/11/26 16:11:56] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.70 'Grok-built apps exposed  orchestrator.py:730
+                             patient data, plaintext                            
+                             passwords, and SpaceXS' — The                      
+                             scale and sensitivity of the                       
+                             exposure, including SpaceXSI’s                     
+                             own internal data, make th                         
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Android Auto is getting  orchestrator.py:730
+                             a Gemini upgrade, but only if                      
+                             you use a Pixel' — It is a                         
+                             confirmed Google feature, but                      
+                             the update is incremental, not                     
+                             available yet, and li                              
+[11/11/26 16:11:58] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.60 'A Grok vibe-coding agent orchestrator.py:730
+                             leaked sensitive SpaceXSI data'                    
+                             — This is a substantial                            
+                             security incident, with                            
+                             sensitive data exposed across                      
+                             thousands of u                                     
+[11/11/26 16:11:59] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.60 'N-able releases security orchestrator.py:730
+                             hotfixes for zero-day                              
+                             vulnerabilities' — N-central                       
+                             administrators have a clear,                       
+                             urgent action to take, and the                     
+                             flaws are being prob                               
+[11/11/26 16:12:04] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Google gooses Python AI  orchestrator.py:730
+                             performance by... removing                         
+                             Python' — This is a meaningful                     
+                             infrastructure release, but its                    
+                             benefits are aimed at                              
+                             ML-serving team                                    
+[11/11/26 16:12:05] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.60 'Enterprise sales push    orchestrator.py:730
+                             OpenAI's quarterly revenue to                      
+                             $10 billion, thoug' — OpenAI’s                     
+                             sharp growth and enterprise                        
+                             shift are consequential for a                      
+                             major AI platform, and                             
+[11/11/26 16:12:06] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Microsoft fixes audio    orchestrator.py:730
+                             issues caused by September                         
+                             security updates' — It’s a                         
+                             confirmed, actionable fix for a                    
+                             subset of Windows users, but                       
+                             the USB-audio issue is                             
+[11/11/26 16:12:09] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.60 'CoreWeave provides       orchestrator.py:730
+                             silver lining for neoclouds as                     
+                             Nvidia storm swirls' —                             
+                             Anthropic’s planned IPO and                        
+                             CoreWeave’s sharp growth make                      
+                             this a notable AI-industry                         
+                             updat                                              
+[11/11/26 16:12:10] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.70 'A 13-Year-Old Asked AI   orchestrator.py:730
+                             About Suicide on Her School                        
+                             Laptop. It Didn’t G' — The                         
+                             allegations put Google’s school                    
+                             AI products and the reliability                    
+                             of student-safety aler                             
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Even Realities glasses   orchestrator.py:730
+                             are coming to a job site near                      
+                             you' — This is a confirmed                         
+                             first step into enterprise for                     
+                             a niche smart-glasses maker,                       
+                             but its pr                                         
+[11/11/26 16:12:15] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'AMD: Where we're going   orchestrator.py:730
+                             we don't need (as much) DRAM' —                    
+                             This could help Epyc customers                     
+                             lower server memory costs,                         
+                             making it a notable enterprise                     
+                             d                                                  
+[11/11/26 16:12:16] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.60 'CISA flags Cisco         orchestrator.py:730
+                             BroadWorks flaw as actively                        
+                             exploited in attacks' — Active                     
+                             exploitation and clear patch                       
+                             guidance make this a useful                        
+                             security item for organiza                         
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'LinkedIn Is Testing a    orchestrator.py:730
+                             Feature That Lets You See Your                     
+                             Profile Stalkers' — It’s a                         
+                             practical privacy-related                          
+                             change on a widely used                            
+                             platform, but it is a minor                        
+                             featu                                              
+[11/11/26 16:12:17] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'UK's 'buy British' tech  orchestrator.py:730
+                             ambitions hit reality as less                      
+                             than £1 in £6 st' — It                             
+                             documents a durable UK                             
+                             public-sector dependency on                        
+                             foreign tech, including AI                         
+                             bundled i                                          
+[11/11/26 16:12:20] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'Samsung Gallery now      orchestrator.py:730
+                             syncs with Google to back up                       
+                             your photos' — A practical new                     
+                             option for Galaxy users, but it                    
+                             is a minor feature rollout with                    
+                             limited re                                         
+[11/11/26 16:12:22] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'Microsoft fixes Exchange orchestrator.py:730
+                             sign-ins broken by Windows                         
+                             Server updates' — Microsoft’s                      
+                             confirmed fix is actionable for                    
+                             administrators running affected                    
+                             on-premises Ex                                     
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.40 'ChatGPT Plus for         orchestrator.py:730
+                             veterans and servicemembers' —                     
+                             This is a confirmed OpenAI                         
+                             program milestone, but it is                       
+                             primarily relevant to veterans                     
+                             and                                                
+[11/11/26 16:12:26] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'OpenAI builds a kill     orchestrator.py:730
+                             switch for its research models'                    
+                             — OpenAI’s safety                                  
+                             infrastructure is a noteworthy                     
+                             development, but the kill                          
+                             switch is for res                                  
+[11/11/26 16:12:27] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO      0.50 'Australia may make       orchestrator.py:730
+                             knowingly selling unsafe AI a                      
+                             crime' — The official review                       
+                             raises a meaningful prospect of                    
+                             tougher AI oversight after a                       
+                             named Ope                                          
+[11/11/26 16:12:28] INFO     Recorded importance for 36   article_tracker.py:363
+                             articles                                           
+                    INFO     HTTP Request: POST                  _client.py:1038
+                             https://vwpvneuphybrqiqfkaei.supaba                
+                             se.co/rest/v1/pipeline_articles?on_                
+                             conflict=url_hash&columns=%22update                
+                             d_at%22%2C%22importance%22%2C%22url                
+                             _hash%22 "HTTP/2 200 OK"                           
+[11/11/26 16:12:29] INFO     Importance: 36 scored → 9       orchestrator.py:773
+                             feature-tier (≥0.6), 27                            
+                             roundup-tier (≥0.35), 0 below                      
+                    INFO                                     orchestrator.py:826
+                             ✓ Prework complete: 103                            
+                             discovered, 103 classified, 36                     
+                             news, 36 scored. Ledger: 2023                      
+                             items across 22 feeds, 1583 not                    
+                             yet admitted.                                      
+                    INFO     Prework: 36 stories scored      modal_deploy.py:343
+                    INFO     ============================== orchestrator.py:1211
+                             ==============================                     
+                    INFO     Starting WAYR Newsletter       orchestrator.py:1212
+                    INFO     ============================== orchestrator.py:1213
+                             ==============================                     
+                    INFO     Window :                       orchestrator.py:1259
+                             2026-11-10T23:36:48.947172+00:                     
+                             00 →                                               
+                             2026-11-11T16:12:29.035046+00:                     
+                             00                                                 
+                    INFO     Sending 61 titles to LLM for   deduplication.py:176
+                             deduplication (44 batch + 17                       
+                             cached)                                            
+[11/11/26 16:13:06] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     LLM found 6 duplicate          deduplication.py:224
+                             group(s), removing 6 batch                         
+                             article(s)                                         
+                    INFO     Duplicate group 1:             deduplication.py:232
+                               [1] November Patch Tuesday                       
+                             boasts over 1,000 bugs but                         
+                             only one zero-day so far                           
+                               [44] Microsoft November 2026                     
+                             Patch Tuesday fixes 1,235                          
+                             flaws, Outlook zero-day                            
+                    INFO     Duplicate group 2:             deduplication.py:232
+                               [3] Grok-built apps exposed                      
+                             patient data, plaintext                            
+                             passwords, and SpaceXSI's own                      
+                             sales pipeline                                     
+                               [6] A Grok vibe-coding agent                     
+                             leaked sensitive SpaceXSI data                     
+                    INFO     Duplicate group 3:             deduplication.py:232
+                               [7] N-able releases security                     
+                             hotfixes for zero-day                              
+                             vulnerabilities                                    
+                               [51] N-able takes its remote                     
+                             access service offline after                       
+                             researcher publishes dozens of                     
+                             zero-day bugs                                      
+                    INFO     Duplicate group 4:             deduplication.py:232
+                               [12] Google’s Tabletop AI                        
+                             experiment lets you build                          
+                             custom collaboration apps                          
+                               [30] Try Tabletop:                               
+                             Customizable, collaborative                        
+                             spaces for groups to plan,                         
+                             play and do more together.                         
+                    INFO     Duplicate group 5:             deduplication.py:232
+                               [17] Google DeepMind just                        
+                             mathematically verified key                        
+                             parts of Signal                                    
+                               [54] Google DeepMind melds                       
+                             humans and AI agents to vet                        
+                             Signal's secure messaging                          
+                             techniques                                         
+                    INFO     Duplicate group 6:             deduplication.py:232
+                               [27] Microsoft’s DLSS                            
+                             competitor is out for the Xbox                     
+                             Ally X and works in handheld                       
+                             mode                                               
+                               [35] Microsoft's Automatic                       
+                             Super Resolution is now                            
+                             officially out for the ROG                         
+                             Xbox Ally X                                        
+                    INFO       Window duplicate of a shipped orchestrator.py:928
+                             story: 'November Patch Tuesday                     
+                             boasts over 1,000 bugs but only                    
+                             one zero-day so'                                   
+                    INFO       Window duplicate: 'A Grok     orchestrator.py:938
+                             vibe-coding agent leaked                           
+                             sensitive SpaceXSI data' → kept                    
+                             'Grok-built apps exposed                           
+                             patient data, plaintext                            
+                             passwords, and SpaceXS'                            
+                    INFO       Window duplicate of a shipped orchestrator.py:928
+                             story: 'N-able releases                            
+                             security hotfixes for zero-day                     
+                             vulnerabilities'                                   
+                    INFO       Window duplicate: 'Google’s   orchestrator.py:938
+                             Tabletop AI experiment lets you                    
+                             build custom collaboration ap'                     
+                             → kept 'Try Tabletop:                              
+                             Customizable, collaborative                        
+                             spaces for groups to plan, p'                      
+                    INFO       Window duplicate of a shipped orchestrator.py:928
+                             story: 'Google DeepMind just                       
+                             mathematically verified key                        
+                             parts of Signal'                                   
+                    INFO       Window duplicate:             orchestrator.py:938
+                             'Microsoft's Automatic Super                       
+                             Resolution is now officially                       
+                             out for the R' → kept                              
+                             'Microsoft’s DLSS competitor is                    
+                             out for the Xbox Ally X and                        
+                             works in ha'                                       
+                    INFO     Marked 6 pool entries as     article_tracker.py:392
+                             duplicates                                         
+                    INFO     Window dedup: collapsed 6 of 44 orchestrator.py:946
+                             candidates                                         
+                    INFO     Selected from 38 candidates: 8 orchestrator.py:1322
+                             featured, 30 roundup, 0                            
+                             dropped, 0 unscored                                
+                    INFO       [FEATURED]  0.7  Anthropic   orchestrator.py:1342
+                             opens Australian retail IPO                        
+                             offering as AI scrutiny                            
+                             intensifies                                        
+                    INFO       [FEATURED]  0.7  Duolingo,   orchestrator.py:1342
+                             Strava, and Ticketmaster Are                       
+                             All Caught Up in EU’s New                          
+                             Digital Fairnes                                    
+                    INFO       [FEATURED]  0.7  Grok-built  orchestrator.py:1342
+                             apps exposed patient data,                         
+                             plaintext passwords, and                           
+                             SpaceXSI's own sa                                  
+                    INFO       [FEATURED]  0.7  A           orchestrator.py:1342
+                             13-Year-Old Asked AI About                         
+                             Suicide on Her School Laptop.                      
+                             It Didn’t Get Flagged                              
+                    INFO       [FEATURED]  0.6  Anthropic   orchestrator.py:1342
+                             says AI is eroding Nvidia's                        
+                             CUDA lead, cutting an AMD chip                     
+                             switch from                                        
+                    INFO       [FEATURED]  0.6  Enterprise  orchestrator.py:1342
+                             sales push OpenAI's quarterly                      
+                             revenue to $10 billion, though                     
+                             it still                                           
+                    INFO       [FEATURED]  0.6  CoreWeave   orchestrator.py:1342
+                             provides silver lining for                         
+                             neoclouds as Nvidia storm                          
+                             swirls                                             
+                    INFO       [FEATURED]  0.6  CISA flags  orchestrator.py:1342
+                             Cisco BroadWorks flaw as                           
+                             actively exploited in attacks                      
+                    INFO       [ROUNDUP]  0.5  CoreWeave    orchestrator.py:1342
+                             soars 23% as CEO reaffirms AI                      
+                             compute demand after strong Q3                     
+                             report                                             
+                    INFO       [ROUNDUP]  0.5  Hackers use  orchestrator.py:1342
+                             AntiFox AI agents in AWS                           
+                             credential-theft attacks                           
+                    INFO       [ROUNDUP]  0.5  Databricks’  orchestrator.py:1342
+                             new AI agent tells CEO Ali                         
+                             Ghodsi the unvarnished truth                       
+                    INFO       [ROUNDUP]  0.5  Google’s     orchestrator.py:1342
+                             AlphaGenome 2 zooms in on the                      
+                             cellular roots of disease                          
+                    INFO       [ROUNDUP]  0.5  Microsoft's  orchestrator.py:1342
+                             Patch Tuesday can't break                          
+                             stuff if it won't install                          
+                    INFO       [ROUNDUP]  0.5  DeepL wants  orchestrator.py:1342
+                             real-time translation to                           
+                             finally capture sarcasm and                        
+                             mood shifts                                        
+                    INFO       [ROUNDUP]  0.5  AMD: Where   orchestrator.py:1342
+                             we're going we don't need (as                      
+                             much) DRAM                                         
+                    INFO       [ROUNDUP]  0.5  UK's 'buy    orchestrator.py:1342
+                             British' tech ambitions hit                        
+                             reality as less than £1 in £6                      
+                             stays at hom                                       
+                    INFO       [ROUNDUP]  0.5  Microsoft    orchestrator.py:1342
+                             fixes Exchange sign-ins broken                     
+                             by Windows Server updates                          
+                    INFO       [ROUNDUP]  0.5  OpenAI       orchestrator.py:1342
+                             builds a kill switch for its                       
+                             research models                                    
+                    INFO       [ROUNDUP]  0.5  Australia    orchestrator.py:1342
+                             may make knowingly selling                         
+                             unsafe AI a crime                                  
+                    INFO       [ROUNDUP]  0.4  iCloud Mail, orchestrator.py:1342
+                             Calendar, Contacts and More                        
+                             Experiencing Outage                                
+                    INFO       [ROUNDUP]  0.4  Apple's      orchestrator.py:1342
+                             Claris Testing 'Harbor' App                        
+                             for Local AI on Macs                               
+                    INFO       [ROUNDUP]  0.4  X launches   orchestrator.py:1342
+                             its own clipping feature to                        
+                             spur influencer engagement                         
+                    INFO       [ROUNDUP]  0.4  Microsoft’s  orchestrator.py:1342
+                             DLSS competitor is out for the                     
+                             Xbox Ally X and works in                           
+                             handheld mod                                       
+                    INFO       [ROUNDUP]  0.4  How to get   orchestrator.py:1342
+                             this Siri camera upgrade for                       
+                             your iPad before its public                        
+                             release                                            
+                    INFO       [ROUNDUP]  0.4  VMware       orchestrator.py:1342
+                             floats new standard to make                        
+                             sure apps don’t break in                           
+                             hybrid K8s environme                               
+                    INFO       [ROUNDUP]  0.4  Try          orchestrator.py:1342
+                             Tabletop: Customizable,                            
+                             collaborative spaces for                           
+                             groups to plan, play and do                        
+                    INFO       [ROUNDUP]  0.4  CoreWeave    orchestrator.py:1342
+                             CEO Intrator tells CNBC he has                     
+                             canceled his planned share                         
+                             sale program                                       
+                    INFO       [ROUNDUP]  0.4  Siri         orchestrator.py:1342
+                             co-founder backs Helix for its                     
+                             voice ID tech                                      
+                    INFO       [ROUNDUP]  0.4  Plurai wants orchestrator.py:1342
+                             to help AI agents work better                      
+                             using the same approach that                       
+                             helped g                                           
+                    INFO       [ROUNDUP]  0.4  Adobe’s AI   orchestrator.py:1342
+                             experiments let you walk                           
+                             around in photos and interview                     
+                             your characte                                      
+                    INFO       [ROUNDUP]  0.4  Apple tells  orchestrator.py:1342
+                             its Support Community to STFU                      
+                    INFO       [ROUNDUP]  0.4  Android Auto orchestrator.py:1342
+                             is getting a Gemini upgrade,                       
+                             but only if you use a Pixel                        
+                    INFO       [ROUNDUP]  0.4  Google       orchestrator.py:1342
+                             gooses Python AI performance                       
+                             by... removing Python                              
+                    INFO       [ROUNDUP]  0.4  Microsoft    orchestrator.py:1342
+                             fixes audio issues caused by                       
+                             September security updates                         
+                    INFO       [ROUNDUP]  0.4  Even         orchestrator.py:1342
+                             Realities glasses are coming                       
+                             to a job site near you                             
+                    INFO       [ROUNDUP]  0.4  LinkedIn Is  orchestrator.py:1342
+                             Testing a Feature That Lets                        
+                             You See Your Profile Stalkers                      
+                    INFO       [ROUNDUP]  0.4  ChatGPT Plus orchestrator.py:1342
+                             for veterans and                                   
+                             servicemembers                                     
+                    INFO       [ROUNDUP]  0.4  Samsung      orchestrator.py:1342
+                             Gallery now syncs with Google                      
+                             to back up your photos                             
+                    WARNING  21 selected stories had no     orchestrator.py:1373
+                             section with room or a                             
+                             matching tier/category — add a                     
+                             catch-all section: CISA flags                      
+                             Cisco BroadWorks flaw as                           
+                             actively exploited in at;                          
+                             Australia may make knowingly                       
+                             selling unsafe AI a crime;                         
+                             iCloud Mail, Calendar,                             
+                             Contacts and More Experiencing                     
+                             Outage; Apple's Claris Testing                     
+                             'Harbor' App for Local AI on                       
+                             Macs; X launches its own                           
+                             clipping feature to spur                           
+                             influencer engag                                   
+                    INFO       section 'Top Story' : 1      orchestrator.py:1379
+                             stories                                            
+                    INFO       section 'Today's stories' :  orchestrator.py:1379
+                             6 stories                                          
+                    INFO       section 'Also worth knowing' orchestrator.py:1379
+                             : 10 stories                                       
+                    INFO                                    orchestrator.py:1393
+                             Summarizing 7 selected stories                     
+                             from source                                        
+[11/11/26 16:13:10] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+[11/11/26 16:13:11] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+[11/11/26 16:13:12] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+[11/11/26 16:13:13] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+[11/11/26 16:13:15] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO                                    orchestrator.py:1439
+                             Compiling the issue (subject,                      
+                             intro, headlines, emoji)                           
+[11/11/26 16:13:42] INFO     HTTP Request: POST                  _client.py:1922
+                             https://api.openai.com/v1/chat/comp                
+                             letions "HTTP/1.1 200 OK"                          
+                    INFO     NewsletterAgent: wrote 7/7        newsletter.py:207
+                             stories, subject 'Anthropic opens                  
+                             Australian retail share offer'                     
+                    INFO     Rendered issue: 17 stories     orchestrator.py:1458
+                             across 3 sections, 7620 bytes                      
+                             of HTML                                            
+                    INFO                                    orchestrator.py:1479
+                             Pushing draft to wordpress                         
+                    INFO     ------------------------------ orchestrator.py:1480
+                             ------------------------------                     
+                    INFO     WordPress: creating publish         wordpress.py:72
+                             'Anthropic opens Australian retail                 
+                             share offer' in category                           
+                             'Newsletter'                                       
+                    INFO     Creating WordPress post:    wordpress_client.py:105
+                             Anthropic opens Australian                         
+                             retail share offer                                 
+                    INFO     Post created successfully:  wordpress_client.py:112
+                             ID=1879,                                           
+                             URL=https://cms.wayrtoday.c                        
+                             om/anthropic-opens-australi                        
+                             an-retail-share-offer/                             
+                    INFO     WordPress: draft 1879 (publish) at wordpress.py:100
+                             https://cms.wayrtoday.com/anthropi                 
+                             c-opens-australian-retail-share-of                 
+                             fer/                                               
+                    INFO     ✓ Issue is in wordpress        orchestrator.py:1515
+                             (publish): id 1879,                                
+                             https://cms.wayrtoday.com/anth                     
+                             ropic-opens-australian-retail-                     
+                             share-offer/                                       
+                    INFO                                    orchestrator.py:1527
+                             Sending the email via                              
+                             resend-direct                                      
+                    INFO     ------------------------------ orchestrator.py:1530
+                             ------------------------------                     
+[11/11/26 16:13:43] INFO     HTTP Request: GET                   _client.py:1038
+                             https://vwpvneuphybrqiqfkaei.supaba                
+                             se.co/rest/v1/subscribers?select=em                
+                             ail%2Cunsubscribe_token&status=eq.c                
+                             onfirmed&order=created_at.asc&offse                
+                             t=0&limit=1000 "HTTP/2 200 OK"                     
+                    INFO     Resend: sending 'Anthropic     resend_direct.py:237
+                             opens Australian retail share                      
+                             offer' to 1 confirmed                              
+                             subscribers in 1 batch(es)                         
+                    INFO     HTTP Request: POST                  _client.py:1786
+                             https://api.resend.com/emails/batch                
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     Resend: sent to 1              resend_direct.py:263
+                    INFO     ✓ Email sent to 1 via          orchestrator.py:1547
+                             resend-direct: id                                  
+                             01a1cb62-f8c6-7c99-aee0-b638ec                     
+                             8fbeaf                                             
+                    INFO                                    orchestrator.py:1560
+                             Posting the issue to social                        
+                             media                                              
+                    INFO     ------------------------------ orchestrator.py:1561
+                             ------------------------------                     
+[11/11/26 16:13:44] INFO     LinkedIn: posted the issue      social_media.py:284
+                             (urn:li:share:75263162401481031                    
+                             68)                                                
+                    INFO     Newsletter run recorded:     newsletter_runs.py:127
+                             success, 17 stories, window                        
+                             2026-11-10T23:36:48.947172+0                       
+                             0:00 →                                             
+                             2026-11-11T16:12:29.035046+0                       
+                             0:00                                               
+                    INFO     HTTP Request: POST                  _client.py:1038
+                             https://vwpvneuphybrqiqfkaei.supaba                
+                             se.co/rest/v1/newsletter_runs                      
+                             "HTTP/2 201 Created"                               
+                    INFO     Watermark advanced to          orchestrator.py:1590
+                             2026-11-11T16:12:29.035046+00:                     
+                             00                                                 
+[11/11/26 16:13:45] INFO     Newsletter run: published       modal_deploy.py:353

@@ -1463,10 +1463,13 @@ class TestResume:
         assert r.resumed == 1
         classified = {c.original.title for c in r.classified}
         assert classified == {"Story 1", "Story 10"}
-        # Story 10 advanced past 'discovered'; Story 11 stays for the next run.
-        assert [e["title"] for e in o.article_tracker.get_unclassified()] == [
-            "Story 11"
+        # Story 10 advanced past 'discovered'; Story 11 had no text and is marked
+        # unreadable, so it is not offered to the next run either.
+        assert o.article_tracker.get_unclassified() == []
+        entry = o.article_tracker.processed[
+            o.article_tracker._get_article_hash(art(11))
         ]
+        assert entry["last_stage"] == "discovered" and entry["unreadable"]
 
     @pytest.mark.asyncio
     async def test_fresh_discovery_is_not_double_counted_as_resume(

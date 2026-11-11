@@ -482,9 +482,25 @@ class ArticleTracker:
             if isinstance(data, dict)
             and data.get("last_stage") == "discovered"
             and data.get("created_at", "") >= cutoff
+            and not data.get("unreadable")
         ]
         stuck.sort(key=lambda x: x.get("created_at", ""))
         return stuck
+
+    def mark_unreadable(self, url_hashes: List[str], reason: str = "") -> int:
+        """A resume attempt found no text to classify (page refused, feed summary
+        thin). Remember that, so the entry is not re-fetched on every run; it stays
+        in the cache until retention purges it."""
+        count = 0
+        for h in url_hashes:
+            entry = self.processed.get(h)
+            if isinstance(entry, dict) and not entry.get("unreadable"):
+                entry["unreadable"] = reason or "no readable text"
+                entry["updated_at"] = _now()
+                count += 1
+        if count:
+            self._save_cache()
+        return count
 
     def get_window_candidates(
         self,

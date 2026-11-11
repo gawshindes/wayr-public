@@ -23,6 +23,7 @@ if [ -z "$1" ]; then
     echo "  india    - India region"
     echo ""
     echo "Actions:"
+    echo "  release  - deploy + upload the secret + connection test, in that order (the way production changes)"
     echo "  deploy   - Deploy to Modal (scheduled, runs every 2 hours)"
     echo "  run      - Trigger one-time run now"
     echo "  preview  - Test locally (no publish)"
@@ -36,6 +37,7 @@ if [ -z "$1" ]; then
     echo "  WAYR_NEWSLETTER_CRON='30 17 * * *' to move the daily compile (keep :30)"
     echo ""
     echo "Examples:"
+    echo "  WAYR_PIPELINE_MODE=newsletter WAYR_NEWSLETTER_CRON='30 12 * * *' ./deploy.sh prod release   # wayrtoday: code + secret + test"
     echo "  ./deploy.sh prod deploy   # Deploy to US production"
     echo "  ./deploy.sh india deploy  # Deploy to India"
     echo "  ./deploy.sh prod run      # Trigger US run now"
@@ -95,6 +97,29 @@ case $ACTION in
         fi
         ;;
 
+    release)
+        # The one way production should change: code and secret move together, in the
+        # order that is always safe (new code reads old and new setting names; the new
+        # secret may use names only the new code knows), then a connection test inside
+        # Modal so a bad release fails here, not at the next scheduled run.
+        NEWSLETTER=${WAYR_NEWSLETTER:-wayrtoday}
+        ENV_FILE=${WAYR_ENV_FILE:-.env.$([[ "$ENV" == "prod" ]] && echo usa || echo "$ENV")}
+        [[ -f "$ENV_FILE" ]] || { echo -e "${RED}no env file $ENV_FILE (set WAYR_ENV_FILE)${NC}"; exit 1; }
+        [[ -d "newsletters/$NEWSLETTER" ]] || { echo -e "${RED}no newsletters/$NEWSLETTER (set WAYR_NEWSLETTER)${NC}"; exit 1; }
+        echo -e "${YELLOW}Release: $(git rev-parse --short HEAD)$(git diff --quiet || echo ' + uncommitted changes') → $ENV ($MODE), secret from $ENV_FILE + newsletters/$NEWSLETTER${NC}"
+        echo -e "${GREEN}[1/3] deploy${NC}"
+        WAYR_ENV=$ENV WAYR_PIPELINE_MODE=$MODE poetry run modal deploy modal_deploy.py
+        echo -e "${GREEN}[2/3] secret${NC}"
+        poetry run python scripts/modal_secret.py --env-file "$ENV_FILE" --newsletter "$NEWSLETTER" --env "$ENV" --apply | grep -vE "^\s+os\.getenv|^Use it in your Modal app|^@app|^def some_function|^\s*$"
+        echo -e "${GREEN}[3/3] connection test inside Modal${NC}"
+        if WAYR_ENV=$ENV WAYR_PIPELINE_MODE=$MODE poetry run modal run modal_deploy.py::test_connections 2>&1 | tee /dev/stderr | grep -q "All connections successful"; then
+            echo -e "${GREEN}✅ Released $(git rev-parse --short HEAD) to $ENV${NC}"
+        else
+            echo -e "${RED}❌ Connection test failed after release — the schedule will fail the same way; fix and release again${NC}"
+            exit 1
+        fi
+        ;;
+
     run)
         echo -e "${GREEN}Triggering manual run on $ENV...${NC}"
         WAYR_ENV=$ENV WAYR_PIPELINE_MODE=$MODE poetry run modal run modal_deploy.py
@@ -136,7 +161,7 @@ case $ACTION in
 
     *)
         echo -e "${RED}Unknown action: $ACTION${NC}"
-        echo "Valid actions: deploy, run, preview, test, logs, stop"
+        echo "Valid actions: release, deploy, run, preview, test, logs, stop"
         exit 1
         ;;
 esac

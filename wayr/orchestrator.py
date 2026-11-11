@@ -510,7 +510,18 @@ class WAYROrchestrator:
             entries, _one, limit=self.settings.pipeline_concurrency
         )
         out = [a for a in revived if a is not None]
-        logger.info(f"Resumed {len(out)} of {len(entries)} with readable text")
+        unreadable = [e["url_hash"] for e, a in zip(entries, revived) if a is None]
+        if unreadable:
+            # Not worth fetching again next run; the entry ages out with retention.
+            self.article_tracker.mark_unreadable(unreadable)
+        logger.info(
+            f"Resumed {len(out)} of {len(entries)} with readable text"
+            + (
+                f"; {len(unreadable)} marked unreadable, not retried"
+                if unreadable
+                else ""
+            )
+        )
         return out
 
     async def _reconstruct_candidates(self, cache_entries: list) -> list:
