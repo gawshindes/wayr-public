@@ -123,7 +123,7 @@ class ResendMailer(NewsletterMailer):
             raise MailError(
                 "email HTML has no unsubscribe link; render it with the email template"
             )
-        subject = (issue.subject_line or issue.title).strip() or issue.title
+        subject = issue.email_subject
         payload: Dict[str, Any] = {
             "segment_id": self.segment_id,
             "from": self.sender,

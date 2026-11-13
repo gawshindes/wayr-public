@@ -82,3 +82,4 @@ __pycache__/modal_*
 # Fetched newsletter HTML from scripts/describe_newsletter.py (third-party content)
 .cache/
 !.env.demo.base.example
+log.txt

@@ -48,7 +48,7 @@ The guide below is this newsletter's own voice. It governs tone, how the opening
 
 ## Issue-level fields
 
-- `subject_line`: at most 60 characters. Lead with the single most important story. Concrete, no clickbait, no colon-then-teaser.
+- `subject_line`: two or three stories, most important first, each named in two to five words and separated by commas, at most 90 characters in all — e.g. "ScreenConnect hits 47 organizations, Nvidia CEO search, Gemini Decisions API". An issue is a digest and the subject must read like one; a subject that names only one story is wrong. Concrete, no clickbait, no colon-then-teaser, no label such as "Daily Digest" (the newsletter adds its own).
 - `title`: the title shown at the top of the issue. May equal the subject line.
 - {{INTRO_RULE}}
 

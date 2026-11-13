@@ -416,3 +416,16 @@ class TestSupabaseKeyName:
         assert make(**WP).supabase_secret_key == "from-env-legacy"
         monkeypatch.setenv("SUPABASE_SECRET_KEY", "from-env-new")
         assert make(**WP).supabase_secret_key == "from-env-new"
+
+
+class TestNewsletterLabel:
+    def test_new_name_and_old_social_name_both_populate_the_field(self, monkeypatch):
+        assert make(**WP).newsletter_label == ""
+        assert (
+            make(**WP, newsletter_label="Daily Digest").newsletter_label
+            == "Daily Digest"
+        )
+        monkeypatch.setenv("NEWSLETTER_SOCIAL_LABEL", "DAILY DIGEST")
+        assert make(**WP).newsletter_label == "DAILY DIGEST"
+        monkeypatch.setenv("NEWSLETTER_LABEL", "Daily Digest")
+        assert make(**WP).newsletter_label == "Daily Digest"

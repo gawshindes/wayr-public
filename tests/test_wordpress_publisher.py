@@ -169,3 +169,13 @@ class TestSlug:
     async def test_result_carries_the_posts_slug(self):
         r = await publisher().publish(issue(), "<p>hi</p>")
         assert r.slug == "subject-here"
+
+
+@pytest.mark.asyncio
+async def test_kicker_and_h1_are_stripped_for_the_site():
+    """The site shows the title and the category itself; the kicker is for the inbox."""
+    p = publisher()
+    html = '<div><p class="kicker">WAYR · Daily Digest</p>\n<h1>T</h1>\n<p class="date">d</p></div>'
+    await p.publish(issue(), html)
+    sent = p.client.create_post.call_args.kwargs["content"]
+    assert "kicker" not in sent and "<h1" not in sent and '<p class="date">' in sent

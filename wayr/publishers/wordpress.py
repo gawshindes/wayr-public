@@ -18,6 +18,7 @@ from wayr.utils import get_logger
 logger = get_logger(__name__)
 
 _H1 = re.compile(r"<h1\b[^>]*>.*?</h1>\s*", re.S | re.I)
+_KICKER = re.compile(r'<p class="kicker">.*?</p>\s*', re.S | re.I)
 
 
 class WordPressNewsletterPublisher(NewsletterPublisher):
@@ -67,8 +68,8 @@ class WordPressNewsletterPublisher(NewsletterPublisher):
     async def publish(self, issue: NewsletterIssue, html: str) -> PublishResult:
         title = (issue.subject_line or issue.title).strip() or issue.title
         # WordPress renders the post title itself; the template's own <h1>
-        # would show the heading twice.
-        html = _H1.sub("", html, count=1)
+        # would show the heading twice, and the kicker belongs to the inbox.
+        html = _H1.sub("", _KICKER.sub("", html, count=1), count=1)
         logger.info(
             f"WordPress: creating {self.delivery} '{title[:70]}' in category '{self.category}'"
         )

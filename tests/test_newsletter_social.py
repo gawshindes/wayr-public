@@ -170,8 +170,8 @@ class TestPostLink:
 
 
 class TestLabelAndPublicUrl:
-    def test_label_opens_linkedin_and_tweet(self):
-        c = social_copy(issue(), "DAILY DIGEST")
+    def test_label_opens_linkedin_and_tweet_in_capitals(self):
+        c = social_copy(issue(), "Daily Digest")
         assert c.linkedin.startswith("DAILY DIGEST · 10 Nov 2026\n\nAnthropic filed")
         assert c.tweet == "DAILY DIGEST: Anthropic opens IPO roadshow"
         assert social_copy(issue(), "").linkedin.startswith("Anthropic filed")

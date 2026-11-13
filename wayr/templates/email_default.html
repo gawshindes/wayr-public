@@ -8,12 +8,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ subject_line or newsletter_title }}</title>
+<title>{{ issue.email_subject }}</title>
 <style>
   body { margin:0; padding:0; background:#f4f4f5; }
   .wrap { max-width:600px; margin:0 auto; padding:24px 16px; }
   .card { background:#ffffff; border-radius:8px; padding:28px 28px 20px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:#18181b; font-size:16px; line-height:1.55; }
   .card h1 { font-size:24px; margin:0 0 4px; }
+  .card .kicker { color:#71717a; font-size:13px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 6px; }
   .card h2 { font-size:18px; margin:28px 0 10px; padding-top:14px; border-top:1px solid #e4e4e7; }
   .card h3 { font-size:17px; margin:18px 0 6px; }
   .card p { margin:0 0 12px; }

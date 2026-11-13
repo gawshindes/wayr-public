@@ -8,3 +8,9 @@ newsletters/own-site     export-ignore
 newsletters/tech-links   export-ignore
 newsletters/wayr-daily   export-ignore
 newsletters/wayrtoday    export-ignore
+# The evaluation fixtures (labelled test cases, run histories, failed-case dumps) are
+# wayrtoday.com's own data and stay private; the evaluators ship, the data does not.
+wayr/evaluation/**/test_cases*.json          export-ignore
+wayr/evaluation/**/history.json              export-ignore
+wayr/evaluation/**/failed_*_cases.json       export-ignore
+wayr/evaluation/**/runs                      export-ignore

@@ -146,9 +146,10 @@ poetry run black wayr/
 poetry run mypy wayr/
 ```
 
-Evaluations for each agent live under `wayr/evaluation/<agent>/` with their test cases and
-a history of runs (tokens and cost included); `poetry run wayr eval-news-type` and friends
-run one agent in isolation. [CLAUDE.md](CLAUDE.md) is the map of the codebase.
+Evaluations for each agent live under `wayr/evaluation/<agent>/`; `poetry run wayr
+eval-news-type` and friends run one agent in isolation and record tokens and cost per run.
+The labelled cases are not in this repository — [wayr/evaluation/README.md](wayr/evaluation/README.md)
+gives the shape, so you can label cases from your own pool. [CLAUDE.md](CLAUDE.md) is the map of the codebase.
 
 ## Docs
 

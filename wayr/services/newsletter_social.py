@@ -66,7 +66,7 @@ def social_copy(issue: NewsletterIssue, label: str = "") -> SocialCopy:
     title = _plain(issue.subject_line or issue.title) or issue.title
     intro = _plain(issue.intro or "")
     heads = headlines(issue)
-    label = (label or "").strip()
+    label = (label or "").strip().upper()
 
     parts: List[str] = []
     if label:

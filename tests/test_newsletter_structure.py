@@ -409,3 +409,66 @@ def test_html_to_text_keeps_paragraphs_and_unescapes():
     assert out == "Pro & Max first.\n\nSecond\nline\n\nx" or out.startswith(
         "Pro & Max first.\n\nSecond\nline"
     )
+
+
+class TestLabel:
+    """An issue says what it is: the label opens the email subject and the header."""
+
+    def _issue(self, **kw):
+        from datetime import datetime, timezone
+
+        from wayr.models.newsletter import NewsletterIssue
+
+        base = dict(
+            title="T",
+            subject_line="ScreenConnect hits 47 orgs, Nvidia CEO search",
+            intro="",
+            date_label="November 12, 2026",
+            sections=[],
+            generated_at=datetime(2026, 11, 12, tzinfo=timezone.utc),
+            platform_name="WAYR",
+        )
+        base.update(kw)
+        return NewsletterIssue(**base)
+
+    def test_email_subject_opens_with_the_label(self):
+        assert (
+            self._issue(label="Daily Digest").email_subject
+            == "Daily Digest: ScreenConnect hits 47 orgs, Nvidia CEO search"
+        )
+
+    def test_no_label_means_the_subject_alone(self):
+        assert (
+            self._issue().email_subject
+            == "ScreenConnect hits 47 orgs, Nvidia CEO search"
+        )
+
+    def test_label_is_not_doubled_and_title_is_the_fallback(self):
+        assert (
+            self._issue(
+                label="Daily Digest", subject_line="Daily Digest: x"
+            ).email_subject
+            == "Daily Digest: x"
+        )
+        assert (
+            self._issue(label="Daily Digest", subject_line="").email_subject
+            == "Daily Digest: T"
+        )
+
+    def test_header_carries_a_kicker_only_when_labelled(self):
+        from wayr.services.newsletter_renderer import NewsletterRenderer
+
+        r = NewsletterRenderer()
+        html = r.render(self._issue(label="Daily Digest"))
+        assert '<p class="kicker">WAYR · Daily Digest</p>' in html
+        assert "kicker" not in r.render(self._issue())
+        email = r.render_email(
+            self._issue(label="Daily Digest"),
+            "<p>b</p>",
+            web_url=None,
+            unsubscribe_url="u",
+        )
+        assert (
+            "<title>Daily Digest: ScreenConnect hits 47 orgs, Nvidia CEO search</title>"
+            in email
+        )

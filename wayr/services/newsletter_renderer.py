@@ -63,6 +63,7 @@ class NewsletterRenderer:
             "issue": issue,
             "newsletter_title": issue.title,
             "subject_line": issue.subject_line,
+            "label": issue.label,
             "intro": issue.intro,
             "date": issue.date_label,
             "sections": issue.sections,

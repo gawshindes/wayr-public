@@ -534,9 +534,17 @@ class Settings(BaseSettings):
             "fetches the link when the post is created). 0 = share at once."
         ),
     )
-    newsletter_social_label: str = Field(
+    # The old name NEWSLETTER_SOCIAL_LABEL is still read.
+    newsletter_label: str = Field(  # type: ignore[pydantic-alias]
         default="",
-        description="Opens every social post so readers know it is an issue, not one story: e.g. DAILY DIGEST",
+        validation_alias=AliasChoices(
+            "NEWSLETTER_LABEL", "NEWSLETTER_SOCIAL_LABEL", "newsletter_label"
+        ),
+        description=(
+            "What an issue is, e.g. 'Daily Digest': opens the email subject, the issue "
+            "header and every social post, so a subject that leads with one story is not "
+            "mistaken for a single story"
+        ),
     )
     newsletter_wordpress_tags: str = Field(
         default="newsletter",

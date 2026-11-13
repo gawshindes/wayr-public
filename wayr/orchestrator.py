@@ -1429,10 +1429,11 @@ class WAYROrchestrator:
             date_label = (
                 f"{pipeline_start:%B} {pipeline_start.day}, {pipeline_start.year}"
             )
-            title = f"{s.platform_name} Daily Brief — {date_label}"
+            title = f"{s.platform_name} {s.newsletter_label or 'Daily Brief'} — {date_label}"
             issue = NewsletterIssue(
                 title=title,
                 subject_line=title,
+                label=s.newsletter_label,
                 intro=(
                     f"The {len(featured)} stories that matter today, plus {len(roundup)} more worth a look."
                     if self.section_schema.intro
@@ -1593,7 +1594,7 @@ class WAYROrchestrator:
                         )
                         logger.error(results["errors"][-1])
                 if published.status == "publish" and reader_url and live:
-                    copy = social_copy(issue, self.settings.newsletter_social_label)
+                    copy = social_copy(issue, self.settings.newsletter_label)
                     logger.info("\nPosting the issue to social media")
                     logger.info("-" * 60)
                     try:

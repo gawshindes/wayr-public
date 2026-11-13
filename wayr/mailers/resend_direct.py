@@ -138,7 +138,7 @@ class ResendDirectMailer(NewsletterMailer):
         msg: Dict[str, Any] = {
             "from": self.sender,
             "to": [sub.email],
-            "subject": (issue.subject_line or issue.title).strip() or issue.title,
+            "subject": issue.email_subject,
             "html": html.replace(UNSUBSCRIBE_PLACEHOLDER, link),
             "headers": {"List-Unsubscribe": f"<{link}>"},
         }
@@ -149,9 +149,7 @@ class ResendDirectMailer(NewsletterMailer):
     @staticmethod
     def _idempotency_key(issue: NewsletterIssue, index: int) -> str:
         stamp = issue.generated_at.strftime("%Y%m%dT%H%M%S")
-        digest = hashlib.sha1(
-            (issue.subject_line or issue.title).encode("utf-8")
-        ).hexdigest()[:10]
+        digest = hashlib.sha1(issue.email_subject.encode("utf-8")).hexdigest()[:10]
         return _KEY_SAFE.sub("-", f"wayr/{stamp}/{digest}/{index}")[:256]
 
     async def _send_batch(
@@ -235,7 +233,7 @@ class ResendDirectMailer(NewsletterMailer):
             for i in range(0, len(recipients), self.batch_size)
         ]
         logger.info(
-            f"Resend: sending '{(issue.subject_line or issue.title)[:70]}' to "
+            f"Resend: sending '{issue.email_subject[:70]}' to "
             f"{len(recipients)} {audience} in {len(batches)} batch(es)"
         )
         ids: List[str] = []

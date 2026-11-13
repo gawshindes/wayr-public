@@ -205,6 +205,19 @@ class NewsletterIssue(BaseModel):
     llm_generated: bool = False
     platform_name: str
     ai_disclosure_notice: str = ""
+    # What kind of thing this is ("Daily Digest"): opens the email subject, the
+    # issue header and every social post, so a reader never mistakes an issue
+    # whose subject leads with one story for a single story.
+    label: str = ""
+
+    @property
+    def email_subject(self) -> str:
+        """The inbox subject: the label, then the subject line (or the title)."""
+        subject = (self.subject_line or self.title).strip() or self.title
+        label = self.label.strip()
+        if label and not subject.lower().startswith(label.lower()):
+            return f"{label}: {subject}"
+        return subject
 
     @property
     def story_count(self) -> int:
